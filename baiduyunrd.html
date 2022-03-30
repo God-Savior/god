@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="author" content="http://cll.name" />
+<title>CLL百度云批量离线下载工具 v1.0 Build 150922a</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script type="text/javascript">
+function line1() {
+i = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+dir2=document.getElementById("dir1").value;
+dir3 = document.getElementById("dir1").value!="" ? "/" : "";
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+function line2(){
+if (i < arr.length){
+ if (arr[i] != ""){
+ document.getElementById('iframe1').contentWindow.location.href="http://pan.baidu.com/rest/2.0/services/cloud_dl?method=add_task&app_id=250528&source_url="+arr[i]+"&save_path=/"+dir2+dir3+"&type=3";
+ document.getElementById("prog1").innerText = ((i+1) + "/" + (arr.length));
+ //window.open("http://pan.baidu.com/rest/2.0/services/cloud_dl?method=add_task&app_id=250528&source_url="+arr[i]+"&save_path=%2F&type=3","iframe1");
+  if (iframe1.attachEvent){
+    iframe1.attachEvent("onload", function(){
+	i++;
+	line2();
+    });
+  } else {
+    iframe1.onload = function(){
+    i++;
+	line2();
+    };}
+ }
+ else {i++; line2();}
+}
+else {alert("完成");}
+}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【CLL百度云批量离线下载工具】v1.0 Build 150922a</b></p>
+<br />
+<a href="http://pan.baidu.com/disk/home">[百度云]</a>
+输入下载到网盘的目录名（留空为根目录）：<input type="text" value="" id="dir1" style="width:160px" />
+<input type="button" value="开始" onclick="line1();"/>
+<br />
+<br />
+在下方输入链接，每个链接一行：<input type="button" value="清空链接" onclick="javascript:document.getElementById('ta1').value=''"/>
+<textarea id="ta1" cols="100" rows="18" style="white-space:nowrap;word-wrap:normal;overflow:scroll">
+</textarea>
+<br />
+进度：[<b id="prog1">0/0</b>]
+状态：<iframe id="iframe1" src="" height="80px" width="600px"></iframe>
+<br />
+<br />
+<p>使用说明：请先打开百度云网页登录，再使用本工具。支持链接参见百度离线下载（支持http/https/ftp/电驴/磁力链协议）</p>
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+
+</body>
+</html>

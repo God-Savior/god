@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东小白信用抢券"/>
+<meta name="description" content="京东小白信用抢券"/>
+<meta name="author" content="http://cll.name/jd" />
+<meta name="referrer" content="never" />
+<title>京东小白信用抢券</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+var t1;
+function Step1() {
+	document.getElementById("alertt").innerHTML = ""
+		var script = document.createElement("script");
+	//var src = document.getElementById("num1").value;
+	script.src = "http://opencredit.jd.com/act/get/coupon?couponBusinessId=" + num1.value + "&actId=004&callback=cp1&_=" + new Date().getTime();
+	document.body.appendChild(script);
+	script.onerror = function () {Step1();};
+}
+function cp1(data1) {
+	var nowm = new Date();
+	mstime = ((nowm.getHours() < 10 ? "0" : "") + nowm.getHours() + ":" + (nowm.getMinutes() < 10 ? "0" : "") + nowm.getMinutes() + ":" + (nowm.getSeconds() < 10 ? "0" : "") + nowm.getSeconds() + "." + nowm.getMilliseconds());
+	console.log(data1.responseCode);
+	if (data1.responseCode == 2000) {
+		document.getElementById("content").innerHTML = "还未登陆！" + mstime;
+	} else if (data1.responseCode == 0002) {
+		document.getElementById("content").innerHTML = "该优惠券不存在或已过期！" + mstime;
+	} else if (data1.responseCode == 13001) {
+		document.getElementById("content").innerHTML = "领取成功！" + mstime;
+	} else if (data1.responseCode == 13002) {
+		document.getElementById("content").innerHTML = "已抢光！" + mstime;
+	} else if (data1.responseCode == 13003) {
+		document.getElementById("content").innerHTML = "领过了！" + mstime;
+	} else if (data1.responseCode == 13005) {
+		document.getElementById("content").innerHTML = "未开通小白信用！" + mstime;
+	} else if (data1.responseCode == 13006) {
+		document.getElementById("content").innerHTML = "黑号！" + mstime;
+	} else if (data1.responseCode == 13010) {
+		document.getElementById("content").innerHTML = "操作太快！" + mstime;
+		ct1();
+	} else if (data1.responseCode == 13011) {
+		document.getElementById("content").innerHTML = "活动没开始！" + mstime;
+		ct1();
+	} else if (data1.responseCode == 13013) {
+		document.getElementById("content").innerHTML = "已抢光！" + mstime;
+	} else {
+		document.getElementById("content").innerHTML = "What? code:" + data1.responseCode +" "+ mstime;
+		ct1();
+	}
+}
+function ct1() {
+	window.clearTimeout(t1);
+	t1 = window.setTimeout(function () {Step1();}, time1.value * 1000);
+	//var now = new Date();
+	//document.getElementById("nowtime1").innerHTML = ((now.getHours() < 10 ? "0" : "") + now.getHours() + ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes() + ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds());
+}
+function Stop1() {
+	window.clearTimeout(t1);
+	//location.reload();
+}
+
+</script>
+
+</head>
+<body >
+<div align="center" style="width:730px;margin:0px auto;">
+<p align="center"><b>【京东小白信用抢券】</b></p>
+
+<br />
+<a href="https://home.m.jd.com/myJd/newhome.action">登陆手机页</a>
+<br />
+couponBusinessId=<input type="text" id="num1" value="6b46790772e2c2ec741b83acf00ac154" style="width:237px" />
+间隔：<input type="text" value="0.1" id="time1" style="width:36px"/>秒
+<input type='button' value='开始' onclick='Step1();' />
+<input type='button' value='停止' onclick='Stop1();' />
+<input type="button" class="button gray" value="活动页" onclick="JavaScript:window.open('http://credit.jd.com/channel/coupon.html?couponBusinessId='+num1.value+'&actId=004')">
+<p>当前状态：<b id="content"></b> <font id="nowtime1"></font></p>
+
+<b id="alertt"></b>
+<br />
+<b id="btim"></b>
+<script type="text/javascript">
+  to_ie = document.getElementById('btim').innerText;
+  setInterval( "t_upd()", 100 );
+  function t_upd(){
+  set_tim( 'btim',8);
+  }
+  function set_tim(oid,shift){
+    d=new Date();
+    h_utc=d.getUTCHours();
+    if( shift!=0 && shift!=13 )
+      d.setUTCHours( h_utc + shift );
+    if( shift ==13 )
+      txt = d.toLocaleString();
+    else
+      txt = d.toUTCString();
+    txt=txt.replace("UTC", "");
+    txt=txt.replace("GMT", "");
+    if( to_ie )
+      document.getElementById(oid).innerText = txt;
+    else
+      document.getElementById(oid).textContent = txt;
+    delete d;
+    }
+</script>
+
+<p>
+当前部分小白信用活动，更新时间2018-6-14：<br />
+<a href="https://credit.jd.com/channel/coupon.html?couponBusinessId=457b39d66855fc53316e6a35a1a68f48&actId=004">50券1</a> 抢券时间：5:30、7:30、9:30、11:30、13:30、15:30、17:30、19:30、21:30、23:30<br />
+<a href="https://credit.jd.com/channel/coupon.html?couponBusinessId=63ab133e755d0bb909bbddba64e0ca22&actId=004">50券2</a> 抢券时间：0点、6点、8点、10点、12点、14点、16点、18点、20点、22点<br />
+<a href="https://credit.jd.com/channel/coupon.html?couponBusinessId=c283b481ebcd20e885516638ee115b38&actId=004">50券3</a> 抢券时间：0:18、6:18、8:18、10:18、12:18、14:18、16:18、18:18、20:18、22:18<br />
+<a href="https://credit.jd.com/channel/coupon.html?couponBusinessId=3a03ed87a4b19cab0adbb44e7f0e768e&actId=004">50数码券</a> 抢券时间：0点、6点、8点、10点、12点、14点、16点、18点、20点、22点<br />
+<a href="https://credit.jd.com/channel/coupon.html?couponBusinessId=6b46790772e2c2ec741b83acf00ac154&actId=004">运费券</a> 抢券时间：0:30、6:30、8:30、10:30、12:30、14:30、16:30、18:30、20:30、22:30<br />
+</p>
+ 
+<p>使用说明：可能会增加黑号等级，谨慎使用。用此工具可减少手动刷新页面的加载时间，提高几率。需开通<a href="https://m.jr.jd.com/jdbt/credit/index.html">小白信用</a>，请先登陆手机端网页，更改文本框字符为领券链接中couponBusinessId=的字符，间隔时间过短会提示操作过快，活动提前一两秒点开始。确保系统时间准确，在时间设置里Internet时间推荐改为阿里云的时间服务器ntp1.aliyun.com。</p>
+
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

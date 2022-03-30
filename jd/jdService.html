@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东物流服务评价,京东商品批量评价"/>
+<meta name="description" content="京东物流服务、商品批量评价"/>
+<meta name="author" content="http://cll.name" />
+<meta name="referrer" content="never" />
+<title>京东物流服务、商品批量评价</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!---->
+
+<script>
+var nowdl="";
+function getid1(){
+	p = eval(link2.value);
+	
+	if (p%5==1 && (link3.value - p)>=4){
+		psize=100;
+		p = Math.ceil(p/5);
+		ojd();
+	}
+	else{
+		psize=20;
+		ojd();
+	}
+}
+
+//$.getScript("http://home.m.jd.com/newAllOrders/newAllOrders.json?page=8",function(req) {console.log(req);});
+
+//window.onerror=function(){return true;}
+
+function getid(){
+	
+	if (p%5==1 && (link3.value - p)>=4){
+		psize=100;
+		p=Math.ceil(p/5);
+		setTimeout("ojd();",10000);
+	}
+	else{
+		psize=20;
+		setTimeout("ojd();",10000);
+	};
+}
+	/*
+	$.ajax({
+	async: false,
+	url: "http://home.m.jd.com/newAllOrders/newAllOrders.json?page=8",
+	dataType: "jsonp",
+	crossDomain: true,
+	//callbackParameter: "callback",
+	//jsonpCallback: "jqcallback",
+	context: this.afsUse,
+	dataFilter: function(data, type){data=eval('('+JSON.stringify(data)+')');return data;},
+	headers:{"Access-Control-Allow-Origin":"*"},
+	//contentType: "application/x-www-form-urlencoded",
+	//jsonp: "callback",
+	
+	//processData: false,
+	//traditional: true,
+	type: "get",
+	success: function(html1){
+	
+	//html1=JSON.stringify(html1);
+	console.log(html1);
+	alert(html1);
+	}
+	}).done(function(html1){alert(html1)});;
+	
+	$.getJSON(link1.value + (eval(link2.value) + p),function(data,status){
+		alert("Data: " + data + "\nStatus: " + status);
+	});
+	*/
+	/*
+	xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+    if (xhr) {
+	    xhr.open('post', "http://home.m.jd.com/newAllOrders/newAllOrders.json?page=8", true);
+		//http://order.jd.com/center/list.action?d=2016&s=4096&t=&keyword=&search=0&page=1
+		xhr.setRequestHeader( "P3P" , 'CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
+		xhr.withCredentials=true;
+        /*xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				page1 = xhr.responseText;
+				/*page2 = page1.substr(page1.indexOf("paipaiOrderIds") + 18);  
+				page3 = page2.substr(0,page2.indexOf("'"));
+				page4 = page3.split(",");
+				for (var i=0; i<page4.length; i++) {
+					document.getElementById("ta1").value += (page4[i] + "\r\n");
+				};/
+				alert(page1)
+				//p++;
+				//getid();
+				
+			}
+		}/
+		xhr.addEventListener('load', function (){alert(xhr.responseText)});
+		xhr.send();
+    }
+	*/
+
+function ojd(){
+	if(psize==20){if (p<10){lp=0}else{lp=9}}else if(psize==100){if (p<3){lp=0}else{lp=2}};
+	//20 >9 少半页， 100 >2 少1页半
+	var script = document.createElement("script");
+    script.src = "https://wqdeal.jd.com/bases/orderlist/deallist?callersource=mainorder&order_type=3&callback=allPayC&bid=&isoldpin=0&utfswitch=1&g_ty=ls&start_page=" + p + "&g_tk="+ link1.value +"&page_size="+ psize + "&last_page="+ lp +"&t="+new Date().getTime();
+    document.body.appendChild(script);
+	script.onerror = function(){ojd();};
+}
+function allPayC(data1){
+	if (data1.ret_code==3){
+		console.log('err');
+		document.getElementById("np1").innerText = "提交过快，重试...";
+		window.setTimeout("ojd();",1000);
+	}
+	else{
+		console.log('fin');
+		for (var i=0; i<data1.deal_list.length; i++){
+			if(data1.deal_list[i].hasSubOrders==0){
+				item1 = "";
+				for (var ii=0; ii<data1.deal_list[i].trade_list.length; ii++){
+					item1 += "+"+data1.deal_list[i].trade_list[ii].item_skuid;
+				}
+				nowdl += (data1.deal_list[i].deal_id +":"+ item1 + "\r\n");
+			}
+		};
+		
+		document.getElementById("ta1").value += nowdl;
+		//nowdl2 = nowdl.replace(/\r\n/g, ",");
+		//nowdl3 = nowdl2.substring(0,nowdl2.length-1);
+		
+		if (psize==100){
+			p=p*5+1;
+		}
+		else if (psize==20){
+			p++;
+		};
+		document.getElementById("np1").innerText = p;
+		if (p > link3.value){
+			document.getElementById("np1").innerText = "完成"
+			//line1();line3();
+		}else{getid();}
+	}
+}
+
+
+function line1(){
+i = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line1a();
+}
+/*
+http://club.jd.com/myJdcomments/insertRestSurvey.action?voteid=145&ruleid=19657859034
+http://club.jd.com/myJdcomments/insertRestSurvey.action?oid=19657859034&gid=69&sid=549656&ro1827=1827A1&ro1828=1828A1&ro1829=1829A1
+
+http://club.jd.com/myJdcomments/saveProductComment.action?orderId=19657859034&productId=1263714&score=5&tag=%255B%255B%25220%2522%252C%2522NICE%2522%255D%255D&content=NICE!%250ANICE!%250ANICE!%250ANICE!%250ANICE!%250ANICE!&saveStatus=1&anonymousFlag=1
+
+http://club.jd.com/myJdcomments/saveProductComment.action?orderId=19657859034&productId=2563068&score=5&content=NICE!%250ANICE!%250ANICE!%250ANICE!%250ANICE!%250ANICE!&saveStatus=1&anonymousFlag=1
+
+
+http://wq.jd.com/eval/SendDSR?pin=&userclient=22&orderId=20517465425&otype=0&DSR1=5&DSR2=5&DSR3=5&_=1470120939383&callback=submitDsrCallback&g_tk=1437065648&g_ty=ls
+
+http://wq.jd.com/eval/SendEval?_=1470121208073&g_tk=1437065648&g_ty=ajax
+http://wq.jd.com/eval/SendEval?g_tk=1437065648&g_ty=ajax&productId=2249240&orderId=20601131141&score=5&content=NICE!%5CnNICE!%5CnNICE!%5CnNICE!%5CnNICE!%5CnNICE!&commentTagStr=1&userclient=22&imageJson=&anonymous=1&syncsg=0&scence=101100000&URL=
+
+*/
+function line1a(){
+if (i < arr.length){
+if (arr[i]){
+	document.getElementById("prog1").innerText = "["+(i+1) + "/" + arr.length + "] " + arr[i];
+	line1b();
+	}
+	else {i++; line1a();}
+}else {document.getElementById("prog1a").innerText = ("服务评价完成");}
+}
+
+function line1b(){
+	var script = document.createElement("script");
+    script.src = "https://wq.jd.com/eval/SendDSR?pin=&userclient=22&orderId="+arr[i].split(":")[0]+"&otype=0&DSR1=5&DSR2=5&DSR3=5&callback=submitDsrCallback&g_tk="+link1.value+"&g_ty=ls&_="+new Date().getTime();
+    document.body.appendChild(script);
+	script.onerror = function(){line1b();};
+}
+function submitDsrCallback(data1){
+	var code1 = data1.data.jingdong_club_tradecomment_save_responce.resultCode;
+	if (code1 == 1){
+		document.getElementById("prog1a").innerText = " 评价成功！";
+		i++;
+		line1a();
+	}
+	else if(code1 == 11){
+		document.getElementById("prog1a").innerText = " 提交过快，重试！";
+		setTimeout("line1b();",1000);
+	}
+	else if(code1 == 2){
+		document.getElementById("prog1a").innerText = " 评价失败！";
+		i++;
+		line1a();
+	}
+}
+
+
+function line3(){
+i = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n");
+arr2 = "";
+for (var i=0; i<arr.length; i++){
+	if (arr[i]){
+		arr1 = arr[i].split(":")[1].split("+");
+		for (i3=1;i3<arr1.length;i3++){
+			arr2 += arr[i].split(":")[0] + ":" + arr1[i3] + ",";
+		}
+	}
+}
+arr3 = arr2.split(",");
+//console.log(arr3);
+i5=0;
+line3a();
+}
+
+function line3a(){
+if (i5 < arr3.length){
+	if (arr3[i5]){
+		arr5 = arr3[i5].split(":");
+		document.getElementById('iframe2').contentWindow.location.href="https://wq.jd.com/eval/SendEval?g_tk="+link1.value+"&g_ty=ajax&productId="+arr5[1]+"&orderId="+arr5[0]+"&score=5&content="+tx1.value.replace(/\n/g,"%5Cn")+"&commentTagStr=1&userclient=22&imageJson=&anonymous=1&syncsg=0&scence=101100000&URL=&callback=try1";
+		document.getElementById("prog2").innerText = "["+(i5+1) + "/" + (arr3.length) + "] " +arr3[i5];
+		//oid="+arr[i5]+"&gid=32&sid=186194&ro591=591A1&ro592=592A1&ro593=593A1&ro899=899A1;
+		if (iframe2.attachEvent){
+		iframe2.attachEvent("onload", function(){
+			i5++;
+			setTimeout("line3a();",10000);
+		});
+		} else {
+			iframe2.onload = function(){
+			i5++;
+			setTimeout("line3a();",10000);
+		};}
+	}
+	else {i5++; line3a();}
+}else {document.getElementById("prog2a").innerText = ("服务评价完成");}
+}
+
+function num(){num1.innerText = Math.floor(tx1.value.length/2);}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【京东物流服务、商品批量评价】</b></p>
+<br />
+<a href="https://order.jd.com/center/list.action">[PC订单]</a>
+<a href="https://wqs.jd.com/order/orderlist_merge.shtml?tab=1">[QQ订单]</a>
+<br />
+g_tk=<input type="text" value="1646276119" id="link1" style="width:100px" />
+页数<input type="text" value="1" id="link2" style="width:20px" />-<input type="text" value="1" id="link3" style="width:20px" />
+<input type="button" value="I.获取订单" onclick="getid1();"/>
+<b id="np1">当前请求页</b>
+<br />
+在下方输入订单ID，每个一行：
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+<br />
+<textarea id="ta1" cols="66" rows="18" style="">
+</textarea>
+<br />
+<br />
+<input type="button" value="II.服务评价" onclick="line1();"/>
+进度：<b id="prog1">[0/0]</b>
+状态：<b id="prog1a"></b>
+<br />
+<br />
+<input type="button" value="II.商品评价" onclick="line3();"/>
+评价内容：
+<br />
+<textarea name="" id="tx1" placeholder="商品是否给力？快分享你的购买心得吧~" style="height:168px; width:500px" onkeyup="num()" onchange="num()">
+〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇
+〇★〇◇〇◇〇★〇◇〇★〇◇〇★★★★★★★〇◇〇★★★★★★★〇
+〇★〇◇〇◇★★〇◇〇★〇◇〇★〇◇〇◇〇★〇◇〇★〇◇〇◇〇◇〇
+〇★〇◇〇★〇★〇◇〇★〇◇〇★〇◇〇◇〇◇〇◇〇★〇◇〇◇〇◇〇
+〇★〇◇★◇〇★〇◇〇★〇◇〇★〇◇〇◇〇◇〇◇〇★★★★★★★〇
+〇★〇★〇◇〇★〇◇〇★〇◇〇★〇◇〇◇〇◇〇◇〇★〇◇〇◇〇◇〇
+〇★★◇〇◇〇★〇◇〇★〇◇〇★〇◇〇◇〇★〇◇〇★〇◇〇◇〇◇〇
+〇★〇◇〇◇〇★〇◇〇★〇◇〇★★★★★★★〇◇〇★★★★★★★〇
+〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇◇〇
+NICE!!!
+批量评价工具：ｈｔｔｐ：／／ｊｄ．ｃｌｌ．ｎａｍｅ
+</textarea>
+<div><b id="num1">0</b>/500（评价多于10个字,有机会奖励京豆哦~）</div>
+
+进度：<b id="prog2">[0/0]</b>
+状态：<b id="prog2a"></b>
+<br />
+<iframe id="iframe2" src="" height="158px" width="500px"></iframe>
+<br />
+<br />
+<p>说明：先将想要评价的商品评价后，再用此工具批量评价。每次使用前需修改g_tk值：京东需绑定QQ，打开登录QQ端订单网页，按F12，Network标签下过滤g_tk，刷新后获取链接中的值，将本页g_tk=后的数值修改，输入页数，点击I.获取QQ订单页ID，系统限制需间隔10秒请求下一页和评价商品。获取完成后点击II.评价项
+</p>
+<p>
+II.可手动输入ID后开始。手动提取订单ID方法：在PC订单页面按F12，在Console选项卡输入文本框内代码后回车，将会在页面顶部显示所在页所有订单和商品ID，复制到本页上方文本框中进行评价<textarea cols="116" rows="2" style="">var alli = $ORDER_CONFIG.orderIdAndWareIds.split(","); for(i=0;i<alli.length;i++){document.getElementById("o-header-2013").innerHTML+=alli[i].replace(/_/g, "+").replace(/\+/, ":+")+"<p>";}</textarea>
+<!--$("[name='orderIdLinks']").each(function(){document.getElementById("o-header-2013").innerHTML+=$(this).text()+"<p>";})-->
+</p>
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+
+</body>
+</html>

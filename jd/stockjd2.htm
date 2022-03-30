@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东库存查询,京东哪有货,京东有货地区"/>
+<meta name="description" content="京东库存查询,京东哪有货,京东有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>京东哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datajd = [
+  {pro1:"2", city1:"78", area1:"51978", sn:"华东|上海:"},
+  {pro1:"12", city1:"904", area1:"905", sn:"华东|江苏:"},
+  {pro1:"15", city1:"1213", area1:"1214", sn:"华东|浙江:"},
+  {pro1:"14", city1:"1116", area1:"1119", sn:"华东|安徽:"},
+  {pro1:"19", city1:"1601", area1:"3633", sn:"华南|广东:"},
+  {pro1:"20", city1:"1715", area1:"1716", sn:"华南|广西:"},
+  {pro1:"16", city1:"1303", area1:"1305", sn:"华南|福建:"},
+  {pro1:"23", city1:"2121", area1:"22466", sn:"华南|海南:"},
+  {pro1:"1", city1:"72", area1:"2799", sn:"华北|北京:"},
+  {pro1:"5", city1:"142", area1:"143", sn:"华北|河北:"},
+  {pro1:"11", city1:"799", area1:"801", sn:"华北|内蒙古:"},
+  {pro1:"13", city1:"1000", area1:"1002", sn:"华北|山东:"},
+  {pro1:"6", city1:"303", area1:"304", sn:"华北|山西:"},
+  {pro1:"3", city1:"51035", area1:"39620", sn:"华北|天津:"},
+  {pro1:"17", city1:"1381", area1:"1386", sn:"华中|湖北:"},
+  {pro1:"18", city1:"1482", area1:"1485", sn:"华中|湖南:"},
+  {pro1:"7", city1:"412", area1:"415", sn:"华中|河南:"},
+  {pro1:"21", city1:"1827", area1:"1828", sn:"华中|江西:"},
+  {pro1:"8", city1:"560", area1:"567", sn:"东北|辽宁:"},
+  {pro1:"10", city1:"698", area1:"699", sn:"东北|黑龙江:"},
+  {pro1:"9", city1:"639", area1:"640", sn:"东北|吉林:"},
+  {pro1:"22", city1:"1930", area1:"4282", sn:"西南|四川:"},
+  {pro1:"4", city1:"113", area1:"9775", sn:"西南|重庆:"},
+  {pro1:"25", city1:"2235", area1:"2236", sn:"西南|云南:"},
+  {pro1:"24", city1:"2144", area1:"2145", sn:"西南|贵州:"},
+  {pro1:"26", city1:"2951", area1:"2952", sn:"西南|西藏:"},
+  {pro1:"27", city1:"2376", area1:"2380", sn:"西北|陕西:"},
+  {pro1:"30", city1:"2628", area1:"2629", sn:"西北|宁夏:"},
+  {pro1:"28", city1:"2487", area1:"2488", sn:"西北|甘肃:"},
+  {pro1:"29", city1:"2580", area1:"2581", sn:"西北|青海:"},
+  {pro1:"31", city1:"2652", area1:"2653", sn:"西北|新疆:"},
+  {pro1:"42", city1:"2754", area1:"2755", sn:"香港:"},
+  {pro1:"43", city1:"2770", area1:"2771", sn:"澳门:"},
+  {pro1:"32", city1:"2768", area1:"2769", sn:"台湾:"},
+  {pro1:"84", city1:"1310", area1:"0", sn:"钓鱼岛:"},
+]; 
+
+ 
+function price_jd() {
+  i = 0;     
+  pricejd();
+}
+ 
+function pricejd() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num1").value;  
+        script.src = "http://wq.jd.com/item/view2?datatype=1&callback=skuInfoCB&sku="+src+"&areaid="+datajd[i].pro1+"_"+datajd[i].city1+"_"+datajd[i].area1+"_0&u_source=weixin";  
+        document.body.appendChild(script);  
+}
+  
+function skuInfoCB(getjd) {
+  		if (getjd.stock.rn == -1)
+		{
+	    document.getElementById("ta1").value += (datajd[i].sn + getjd.stock.StockStateName + " " + getjd.price.p + "元\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datajd[i].sn + getjd.stock.StockStateName + "，剩余:" + getjd.stock.rn + "件" + " " + getjd.price.p + "元\r\n");
+		}
+  		i++;
+  		if(i < datajd.length) {pricejd();}
+  		}
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【京东有货地区|库存查询】</b></p>
+输入京东ID:
+<input type="text" value="" id="num1" style="width:100px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_jd()"/>
+<br />
+<br />
+<textarea id="ta1" cols="36" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：当剩余1~5件时显示库存数量。</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

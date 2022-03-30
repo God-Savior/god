@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东降价提醒,京东价格监控,京东降价通知"/>
+<meta name="description" content="京东降价提醒,京东价格监控,京东降价通知"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>京东PC价格降价提醒|抢购辅助|价格监控|降价通知</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script language="javascript">
+function change(url1) {
+ var num2 = document.getElementById("num1");
+ var link1 = document.getElementById("link1");
+ 
+ link1.href = "http://item.jd.com/"+num2.value+url1;
+ link1.innerHTML = "http://item.jd.com/"+num2.value+url1;
+}
+</script>
+
+<script>
+ step=0
+ function flash_title()
+ {
+  step++      
+  if (step%2==0) {document.title='【快抢！！！】京东PC价格降价提醒|抢购辅助|价格监控|降价通知';
+  document.bgColor = '#000000';}
+  else if (step%2==1) {document.title='【　　　　　】京东PC价格降价提醒|抢购辅助|价格监控|降价通知';
+  document.bgColor = '#FF0000';}
+  clear = setTimeout("flash_title()",200);
+  //if (step==1) {setTimeout("window.clearTimeout(clear);document.bgColor = '#FFFFFF';document.title='京东PC价格降价提醒|抢购辅助|价格监控|降价通知';step=0",6000);}
+  if (step>=30) {window.clearTimeout(clear);document.bgColor = '#FFFFFF';document.title='京东PC价格降价提醒|抢购辅助|价格监控|降价通知';step=0}
+ }
+</script>
+
+<script type="text/javascript">
+    var t1;
+	function price()  
+    {  
+        var script = document.createElement("script");  
+        script.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        script.src = "http://p.3.cn/prices/get?skuid=J_"+src+"&pduid=88888888&callback=lol&_=" + new Date().getTime();  
+        document.body.appendChild(script);  
+    }  
+    function lol(data1) { 	
+	var dprice = eval(document.getElementById("dprice").value);
+	if (data1[0].p <= dprice && data1[0].p >= 0)
+		{
+		if (document.getElementById("_ale").checked) { 
+		 alert("Baby! 现在 "+data1[0].p+" 元！快买！");
+		 window.clearTimeout(t1);
+		 }
+		else {
+		 document.getElementById("alertt").innerHTML = "Baby! 现在 "+data1[0].p+" 元！快抢！！！";
+		 flash_title();
+		}
+		}
+	else
+	    {
+		window.clearTimeout(t1);
+	    document.getElementById("p1").innerText=(data1[0].p);
+		var second1 = document.getElementById("time1").value;
+		t1 = window.setTimeout(price,second1*1000);
+		var now = new Date();
+		document.getElementById("nowtime1").innerHTML = ((now.getHours()<10?"0":"")+now.getHours()+":"+(now.getMinutes()<10?"0":"")+now.getMinutes()+":"+(now.getSeconds()<10?"0":"")+now.getSeconds());
+		}
+    }
+
+</script>  
+</head>
+
+<body>
+<div align="center" style="width:730px;margin:0px auto;">
+<p align="center"><b>【京东PC价格降价提醒】</b></p>
+
+<form>提醒方式：
+<input type="radio" checked="checked" name="ale" id="_ale" />弹窗
+<input type="radio" name="ale" id="_sh" />显示
+</form>
+<br />
+
+京东ID：<input type="text" value="" id="num1" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');change('.html'); " onchange="this.value=this.value.replace(/\D/g,'');change('.html');" style="width:88px"/>
+低于：<input type="text" value="2" id="dprice" style="width:60px"/>元时提醒
+监控时间间隔：<input type="text" value="15" id="time1" style="width:36px"/>秒
+<input type="button" value="开始" onclick="price()"/>
+<br /><br />
+链接：<a href="" id="link1" target="_blank"></a>
+<script>
+change('.html');
+</script>
+<p>当前价格：<b id="p1">___</b>元 <font id="nowtime1"></font></p>
+
+<b id="alertt"></b>
+<br />
+
+<b id="btim"></b>
+<script type="text/javascript">
+  to_ie = document.getElementById('btim').innerText;
+  setInterval( "t_upd()", 100 );
+  function t_upd(){
+  set_tim( 'btim',8);
+  }
+  function set_tim(oid,shift){
+    d=new Date();
+    h_utc=d.getUTCHours();
+    if( shift!=0 && shift!=13 )
+      d.setUTCHours( h_utc + shift );
+    if( shift ==13 )
+      txt = d.toLocaleString();
+    else
+      txt = d.toUTCString();
+    txt=txt.replace("UTC", "");
+    txt=txt.replace("GMT", "");
+    if( to_ie )
+      document.getElementById(oid).innerText = txt;
+    else
+      document.getElementById(oid).textContent = txt;
+    delete d;
+    }
+</script>
+
+<p>说明：仅监控PC页价格</p>
+
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

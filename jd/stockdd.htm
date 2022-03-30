@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="当当库存查询,当当哪有货,当当有货地区"/>
+<meta name="description" content="当当库存查询,当当哪有货,当当有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>当当哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datadd = [
+  {pro1:"131", city1:"3", area1:"1310101", sn:"华东|上海:"},
+  {pro1:"132", city1:"1601", area1:"1320114", sn:"华东|江苏:"},
+  {pro1:"133", city1:"1901", area1:"1330109", sn:"华东|浙江:"},
+  {pro1:"134", city1:"1501", area1:"1340101", sn:"华东|安徽:"},
+  {pro1:"144", city1:"5", area1:"1440108", sn:"华南|广东:"},
+  {pro1:"145", city1:"2201", area1:"1450101", sn:"华南|广西:"},
+  {pro1:"135", city1:"2101", area1:"1350101", sn:"华南|福建:"},
+  {pro1:"146", city1:"2301", area1:"1460101", sn:"华南|海南:"},
+  {pro1:"111", city1:"1", area1:"1110101", sn:"华北|北京:"},
+  {pro1:"113", city1:"601", area1:"1130118", sn:"华北|河北:"},
+  {pro1:"115", city1:"1001", area1:"1150110", sn:"华北|内蒙古:"},
+  {pro1:"137", city1:"1101", area1:"1370111", sn:"华北|山东:"},
+  {pro1:"114", city1:"1201", area1:"1140101", sn:"华北|山西:"},
+  {pro1:"112", city1:"14", area1:"1120101", sn:"华北|天津:"},
+  {pro1:"142", city1:"16", area1:"1420101", sn:"华中|湖北:"},
+  {pro1:"143", city1:"1801", area1:"1430101", sn:"华中|湖南:"},
+  {pro1:"141", city1:"1401", area1:"1410115", sn:"华中|河南:"},
+  {pro1:"136", city1:"2001", area1:"1360101", sn:"华中|江西:"},
+  {pro1:"121", city1:"12", area1:"1210102", sn:"东北|辽宁:"},
+  {pro1:"123", city1:"701", area1:"1230119", sn:"东北|黑龙江:"},
+  {pro1:"122", city1:"801", area1:"1220111", sn:"东北|吉林:"},
+  {pro1:"151", city1:"3001", area1:"1510120", sn:"西南|四川:"},
+  {pro1:"150", city1:"401", area1:"1500141", sn:"西南|重庆:"},
+  {pro1:"153", city1:"2401", area1:"1530101", sn:"西南|云南:"},
+  {pro1:"152", city1:"2501", area1:"1520111", sn:"西南|贵州:"},
+  {pro1:"154", city1:"2901", area1:"1540101", sn:"西南|西藏:"},
+  {pro1:"161", city1:"20", area1:"1610114", sn:"西北|陕西:"},
+  {pro1:"164", city1:"2801", area1:"1640101", sn:"西北|宁夏:"},
+  {pro1:"162", city1:"2701", area1:"1620101", sn:"西北|甘肃:"},
+  {pro1:"163", city1:"3101", area1:"1630101", sn:"西北|青海:"},
+  {pro1:"165", city1:"2601", area1:"1650101", sn:"西北|新疆:"},
+  {pro1:"171", city1:"3501", area1:"", sn:"台湾:"},
+  {pro1:"172", city1:"10", area1:"", sn:"香港:"},
+  {pro1:"173", city1:"3401", area1:"", sn:"澳门:"},
+  {pro1:"0", city1:"800000", area1:"", sn:"钓鱼岛:"},
+]; 
+
+function price_dd() {
+  i = 0;     
+  pricedd();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function pricedd() {
+      if (xhr) {
+        src = document.getElementById("num4").value;
+		xhr.open('get', "http://product.dangdang.com/pricestock/callback.php?type=stockv2&product_id="+src+"&gift_ids=&gift_counts=&fourarea=true&shop_id=0&province_id="+datadd[i].pro1+"&city_id="+datadd[i].city1+"&area_id="+datadd[i].area1+"&page_type=mall", true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  var data1 = eval("(" + xhr.responseText +")");  //JSON.parse(this.responseText)
+  		if (data1.stock_status == 0)
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "全球无货" + "\r\n");
+		}
+		else if (data1.havestock == "realstock")
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "有货" + "\r\n");
+		}
+		else if (data1.havestock == "presale")
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "预售" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datadd[i].sn + "无货" + "\r\n");
+		}
+  		i++;
+  		if(i < datadd.length) {pricedd();}
+		  }
+    }
+        xhr.send();
+      }
+  		}
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【当当有货地区|库存查询】</b></p>
+<br />
+输入当当ID:
+<input type="text" value="60579277" id="num4" style="width:100px" onkeyup="self['num4'].value=self['num4'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_dd()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：本工具使用IE浏览器或者Chrome浏览器使用"IE Tab"扩展程序，本地版需点击：允许阻止的内容，在线版需设置：Internet选项>安全>自定义级别>其它>通过域访问数据源>启用；Chrome浏览器需要在快捷方式 右键>属性>快捷方式>目标 链接后添加“ --disable-web-security”引号内字符，含空格，确定后重新打开，例如："C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

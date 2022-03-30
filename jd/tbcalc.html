@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="淘宝联盟,实际支付金额计算,佣金计算"/>
+<meta name="description" content="淘宝联盟实际支付金额计算 佣金计算 - JavaScript软件,程序"/>
+<meta name="author" content="http://cll.name" />
+<title>淘宝联盟实际支付金额计算 佣金计算 - JavaScript软件,程序</title>
+<!---->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+function calc1(){
+	price1=((t1.value-t1.value*t2.value*0.01)*t3.value*0.01*t5.value*0.01*0.9+t1.value*t2.value*0.01*t3.value*0.01*t5.value*0.01*0.8).toFixed(2);
+	price2=(t1.value-price1).toFixed(2);
+	document.getElementById("t6").value=price1;
+	document.getElementById("t7").value=price2;
+	document.getElementById("t8").value=price1/t1.value*100;
+}
+</script>
+
+</head>
+<body>
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>淘宝联盟实际支付金额计算</b></p>
+<p>
+<a href="https://buyertrade.taobao.com/trade/itemlist/list_bought_items.htm" >[淘宝订单]</a>
+<a href="https://cart.taobao.com/cart.htm" >[购物车]</a>
+<a href="https://taoquan.taobao.com/framework/got_bonus.htm" >[优惠券]</a>
+<a href="https://pub.alimama.com/promo/search/index.htm?toPage=1&queryType=2" target="_blank">[淘宝联盟]</a>
+<a href="https://pub.alimama.com/myunion.htm?#!/report/detail/taoke" target="_blank">[效果报表]</a>
+</p>
+金额:<input id="t1" type="text" value="100" onchange="calc1()" onkeyup="calc1()" onafterpaste="calc1()" style="width:50px">
+佣金比率:<input id="t3" type="text" value="90" onchange="calc1()" onkeyup="calc1()" onafterpaste="calc1()" style="width:32px">%
+分成:<input id="t5" type="text" value="95" onchange="calc1()" onkeyup="calc1()" style="width:26px;position:absolute">
+<span style="margin-left:23px;">
+<select style="margin-left:-27px;" onchange="t5.value=this.value;calc1()">
+	<option value="95" selected>95</option>
+	<option value="100">100</option>
+</select>%
+</span>
+补贴:<input id="t2" type="text" value="0" onchange="calc1()" onkeyup="calc1()" style="width:30px">%
+<b>实际比率:<input id="t8" type="text" value="" style="width:32px" readonly="readonly">%
+返现:<input id="t6" type="text" value="" style="width:50px" readonly="readonly">
+支付:<input id="t7" type="text" value="" style="width:50px" readonly="readonly"></b>
+<input type="button" value="计算" onclick="calc1();" />
+<br/>
+<br/>
+<b id="endtime1"></b>
+
+<p>说明：运费、淘金币支付部分不计算佣金。使用集分宝、支付宝红包、天猫积分进行支付，抵扣的部分会计算佣金。高佣最高比率约为90%，普通佣金商品最高约为50%，定向佣金可超过50%。高佣分成比率为95%，普通、定向佣金分成为100%。每月20日结算上月内已确认收货订单，结算时扣除佣金未补贴部分10%技术服务费，加上补贴部分为20%技术服务费，淘宝无补贴，天猫补贴比例也较少（一般0.5%左右），基本可以忽略不填，补贴比率可在效果报表订单明细页面下载查看。淘宝联盟显示的效果预估未扣除约10%技术服务费。比如100元的商品90%高佣，天猫补贴0.5%，实际返现计算方法约为(100-100*0.005)*0.9*0.95*0.9+100*0.005*0.9*0.95*0.8=76.91元。<br>
+同一商品佣金分普通、定向佣金和高佣。定向佣金有的会比高佣高，需要在淘宝联盟页面点商品下方 定 字符申请后再生成链接，定向佣金优先于普通佣金，有的定向会比普通佣金低请勿申请。高佣需在高佣页面生成链接，高佣搜索页显示的佣金比效果报表预估效果高，未计算95%的分成。自购每次支付后最好看看效果报表预估效果是否生成准确，同店铺多个高佣最好分别下单购买，如果加入购物车同时购买，需每个生成高佣链接打开加入购物车，否则其它未用高佣链接打开的会计算为普通佣金。下载淘客助手、查淘客等浏览器插件方便查看佣金比例和可领优惠券。</p>
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>
+
+
+

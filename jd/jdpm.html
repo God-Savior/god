@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东批量价格监控,京东批量价格查询"/>
+<meta name="description" content="京东批量价格监控 PC、微信、QQ、手机端价格查询"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>京东批量价格监控 PC、微信、QQ、手机端价格查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+function jdpcprice(numn){
+    var jsonp = document.createElement("script");
+    var src1 = document.getElementById("num"+numn).value;
+    jsonp.src = "http://p.3.cn/prices/get?skuid=J_"+src1+"&pduid=88888888&callback=jdpcp"+numn+"&_="+ new Date().getTime();
+	jsonp.onerror = function(){jdpcprice(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jdpcp'+numn+'(datapc1){document.getElementById("ppc'+numn+'").innerText=("PC:"+datapc1[0].p+ "元");aa'+numn+'=1;if(document.getElementById("numd'+numn+'").value>datapc1[0].p && aa'+numn+'==1){alert('+src1+'+"已降价");aa'+numn+'=0};}';
+	document.body.appendChild(myScript);
+}
+
+function pricewx(numn){
+    var jsonp = document.createElement("script");
+    var src1 = document.getElementById("num"+numn).value;
+    jsonp.src = "http://pe.3.cn/prices/mgets?origin=5&skuids="+src1+"&callback=jQuerywx"+numn+"&_="+ new Date().getTime(); //weixin 5
+	jsonp.onerror = function(){pricewx(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQuerywx'+numn+'(datawx1){document.getElementById("pwx'+numn+'").innerText=("WX:"+datawx1[0].p+ "元");if(document.getElementById("numd'+numn+'").value>datawx1[0].p && aa'+numn+'==1){alert('+src1+'+"已降价");aa'+numn+'=0}}';
+	document.body.appendChild(myScript);
+}
+
+function priceqq(numn){
+    var jsonp = document.createElement("script");
+    var src1 = document.getElementById("num"+numn).value;
+    jsonp.src = "http://pe.3.cn/prices/mgets?origin=4&skuids="+src1+"&callback=jQueryqq"+numn+"&_="+ new Date().getTime(); //weixin 5
+	jsonp.onerror = function(){priceqq(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQueryqq'+numn+'(dataqq1){document.getElementById("pqq'+numn+'").innerText=("QQ:"+dataqq1[0].p+ "元");if(document.getElementById("numd'+numn+'").value>dataqq1[0].p && aa'+numn+'==1){alert('+src1+'+"已降价");aa'+numn+'=0}}';
+	document.body.appendChild(myScript);
+}
+
+function jdmprice(numn){
+    var jsonp = document.createElement("script");
+    var src1 = document.getElementById("num"+numn).value;
+    jsonp.src = "http://pm.3.cn/prices/mgets?skuids="+src1+"&origin=2&callback=jQuerym"+numn+"&_="+ new Date().getTime();
+	jsonp.onerror = function(){jdmprice(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQuerym'+numn+'(datam1){document.getElementById("pm'+numn+'").innerText=("M:"+datam1[0].p+ "元");if(document.getElementById("numd'+numn+'").value>datam1[0].p && aa'+numn+'==1){alert('+src1+'+"已降价");aa'+numn+'=0}}';
+	document.body.appendChild(myScript);
+}	
+
+
+var i=2;
+function add1(){
+	/*
+	var newInput = document.createElement("input");
+	newInput.type="text";
+	newInput.style.width="88px";
+	newInput.id="num"+i;
+	//newInput.addEventListener("change",xxx);
+	document.getElementById("line1").appendChild(newInput);
+	document.getElementById("line1").appendChild(document.createElement("br"))
+	*/
+	
+	//content1 = '<input type="text" value="" id="num" style="width:88px"/>';
+	//$('#line1').append(content);
+	//document.getElementById("line1").appendChild("123");
+	var htmlNode = document.createElement('p');
+	htmlNode.id="pnum"+i;
+	htmlNode.innerHTML = i + '、ID:<input type="text" value="" id="num' + i + '" style="width:88px" onchange="this.value=this.value.replace(/\\D/g,'+"''"+')"/> 低于<input type="text" value="" id="numd' + i + '" style="width:38px" onchange="this.value=this.value.replace(/\\D/g,'+"''"+')"/> <button onclick="javascript:document.getElementById('+"'pnum"+i+"'"+').parentNode.removeChild(pnum'+i+');"/>-</button> <b id="ppc' + i + '"></b> <b id="pwx' + i + '"></b> <b id="pqq' + i + '"></b> <b id="pm' + i + '"></b>'
+	//isClick=true;document.getElementById("pnum1").remove();
+	//htmlNode.onclick = function (){if(isClick==true){this.parentNode.removeChild(this)};isClick=false};
+	document.getElementById("line1").appendChild(htmlNode);
+	i++;
+	//console.log(document.getElementsByTagName('input').length);
+}
+//add1().onclick = function (){if(isClick==true){this.parentNode.removeChild(this)};isClick=false};
+
+byinput = document.getElementsByTagName('input');
+
+function getall(){
+	for (i=0;i<byinput.length;i++){
+		if (byinput[i].id.indexOf('numd')<0){
+		if (byinput[i].value){
+			domnum = byinput[i].id.replace(/[^\d]/g,'');
+			//console.log(domnum);
+			jdpcprice(domnum);
+			pricewx(domnum);
+			priceqq(domnum);
+			jdmprice(domnum);
+		}
+		}
+	}
+	
+}
+
+function nowt(){
+	var now = new Date();
+	document.getElementById("nowtime1").innerHTML = ((now.getHours()<10?"0":"")+now.getHours()+":"+(now.getMinutes()<10?"0":"")+now.getMinutes()+":"+(now.getSeconds()<10?"0":"")+now.getSeconds());
+}
+
+var t1="";
+function start1(){
+if(t1){stop1();};
+getall();nowt();
+t1 = window.setInterval(function(){getall();nowt()}, time1.value*1000);
+}
+
+function stop1(){
+window.clearTimeout(t1);
+}
+
+function save1(){
+if(window.localStorage){
+	localStorage.numall=((byinput.length-1)/2);
+	localStorage.numsave = "";
+	//console.log(document.getElementsByTagName('input')[0].value);
+	for (ni=0; ni<byinput.length; ni++){
+		//console.log(eni.value);
+		if (byinput[ni].id.indexOf('numd')<0){
+			localStorage.numsave += ","+byinput[ni].value;
+		} else{localStorage.numsave += "+"+byinput[ni].value}
+		//localStorage.setItem(numsave[ni],(num+ni).value);
+	}
+}else{
+	alert('此浏览器不支持HTML5 LocalStorage，IE需使用在线版');
+}
+/*
+var details = {author:"isaac","description":"fresheggs","rating":100};
+storage.setItem("details",JSON.stringify(details));
+details = JSON.parse(storage.getItem("details"));
+*/
+
+//localStorage.clear();
+//localStorage.removeItem("c");
+//for(var i=0;i<localStorage.length;i++){document.write(localStorage.key(i)+ " : " + localStorage.getItem(localStorage.key(i)) + "<br>")};
+  
+console.log(localStorage);
+}
+
+function clear1(){
+var line1=document.getElementById("line1");
+//line1.removeChild(line1.childNodes[1]);
+line1.removeChild(line1.lastChild);
+}
+
+/*
+function clearthis(ni){
+var line1=document.getElementById("line1");
+line1.removeChild(line1.childNodes[ni]);
+for (i=0;i<line1.childNodes.length;i++){
+line1.childNodes[i].indexOf("num3");
+}
+}
+*/
+
+function clearall(){
+var line1=document.getElementById("line1");
+for(var i=line1.childNodes.length-1;i>0;i--){
+line1.removeChild(line1.childNodes[i]);
+//console.log(line1.childNodes.length);
+//console.log(i);
+}
+}
+
+//isClick=false;
+
+function line1(){
+ii = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n");
+line2();
+}
+
+function line2(){
+	if (ii < arr.length){
+		if (arr[ii] != ""){
+			add1();
+			document.getElementById("num"+(i-1)).value = arr[ii];
+			ii++; line2();
+		}
+		else {ii++; line2();}
+	}
+	else {alert("已添加");}
+}
+
+
+</script>
+
+</head>
+<body >
+<div style="width:880px;margin:0px auto;">
+<p align="center"><b>【京东批量价格监控】</b></p>
+<div style="width:150px;float:left;">
+商品ID：
+<button onclick="javascript:document.getElementById('ta1').value=''">清空</button>
+<br />
+<textarea id="ta1" cols="12" rows="18" style=""></textarea>
+<br />
+<button onclick="line1()">批量添加</button>
+</div>
+<div align="left" style="margin-left:150px; width:730px;">
+<button onclick="start1();">开始</button>
+<button onclick="stop1();">停止</button>
+<button onclick="save1();"/>保存</button>
+<button onclick="add1();"/>增加1个</button>
+<button onclick="clear1()"/>减少1个</button>
+<button onclick="clearall();"/>全部清除</button>
+时间间隔：<input type="text" value="15" style="width:30px" id="time1" onkeyup="this.value=this.value.replace(/\D/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>秒
+<b id="nowtime1">最近处理时间</b>
+<br/>
+
+<b id="btim"></b>
+<script type="text/javascript">
+  to_ie = document.getElementById('btim').innerText;
+  setInterval( "t_upd()", 100 );
+  function t_upd(){
+  set_tim( 'btim',8);
+  }
+  function set_tim(oid,shift){
+    d=new Date();
+    h_utc=d.getUTCHours();
+    if( shift!=0 && shift!=13 )
+      d.setUTCHours( h_utc + shift );
+    if( shift ==13 )
+      txt = d.toLocaleString();
+    else
+      txt = d.toUTCString();
+    txt=txt.replace("UTC", "");
+    txt=txt.replace("GMT", "");
+    if( to_ie )
+      document.getElementById(oid).innerText = txt;
+    else
+      document.getElementById(oid).textContent = txt;
+    delete d;
+    }
+</script>
+
+<div id="line1">
+<p id="pnum1">
+1、ID:<input type="text" value="" style="width:88px" id="num1" onkeyup="this.value=this.value.replace(/\D/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+低于<input type="text" value="" style="width:38px" id="numd1" onkeyup="this.value=this.value.replace(/\D/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<button id="bnum1" onclick="javascript:document.getElementById('pnum1').parentNode.removeChild(pnum1);"/>-</button>
+<b id="ppc1"></b> <b id="pwx1"></b> <b id="pqq1"></b> <b id="pm1"></b>
+</p>
+</div>
+
+<script>
+function load1(){
+	var ls = localStorage.numsave.split(',');
+	var ii2 = 1;
+	time1.value = ls[1];
+	for (ii=0;ii<ls.length;ii++){
+		//console.log(ls[ii]);
+		if (ls[ii].indexOf("+")>0 && ls[ii].length>1){
+			add1();
+			ls2 = ls[ii].split('+');
+			eval('num'+ii2).value = ls2[0];
+			eval('numd'+ii2).value = ls2[1];
+			ii2++;
+		}
+		//byinput[ii2].value = ls[ii];
+	}
+}
+load1();
+</script>
+</div>
+<p>说明：同时监控PC、微信、QQ、手机端价格。单个每次完整获取价格时间大致为1秒内，时间间隔最好设置为1秒以上。IE本地版不支持保存。</p>
+
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

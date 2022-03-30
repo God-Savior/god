@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="检测网页更改,Detect,Webpage,Change"/>
+<meta name="description" content="检测网页更改 | Detect Webpage Change - JavaScript软件,程序"/>
+<meta name="author" content="http://cll.name" />
+<title>检测网页更改 | Detect Webpage Change - JavaScript软件,程序</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+var t1;
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function getdc1() {
+i=0;
+getdc();
+}
+
+function getdc() {
+    pro1.innerText = i+1;
+	if (xhr) {
+	    xhr.open('get', link1.value , true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+			page1 = xhr.responseText;
+			if (i<=0){
+				pagesave = page1;
+				pro2.innerText = pagesave.length;
+				getdc2();
+			} else {
+				getdc2();
+			}
+		}}
+    }
+    xhr.send();
+    }
+};
+
+function getdc2() {
+	page2 = page1.indexOf(text1.value);
+	if (document.getElementById("dcc").checked){
+		if (page1.length != pagesave.length){
+			alert("已更改！");
+			window.clearTimeout(t1);
+		} else {getdc3()}
+	}
+	else if (document.getElementById("dcy").checked){
+		if (page2 >=0 ){
+			alert("已出现！");
+			window.clearTimeout(t1);
+		} else {getdc3()}
+	} else {
+		if (page2 <0 ){
+			alert("已消失！");
+			window.clearTimeout(t1);
+		} else {getdc3()}
+	}
+}
+
+function getdc3() {
+	i++;
+	window.clearTimeout(t1);
+	t1 = window.setTimeout(getdc,text2.value*1000);
+}
+
+function getdcs() {
+	window.clearTimeout(t1);
+}
+
+</script>
+
+</head>
+
+<body>
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【检测网页更改 | Detect Webpage Change】</b></p>
+<br />
+链接：<input type="text" value="http://searchex.yixun.com/705984-1-/all/----2---60--1------.html#list" id="link1" style="width:600px" />
+<input type='button' value='Open' onclick='JavaScript:window.open(link1.value)' />
+<br />
+<br />
+搜索源代码字符<input type="radio" name="dc" id="dcc" checked="checked" onclick=""/>变动 | 
+<input type="radio" name="dc" id="dcy" onclick=""/>出现
+<input type="radio" name="dc" id="dcn" onclick=""/>消失
+<input type="text" value="pnum" id="text1" style="width:80px" /> | 
+
+时间间隔：<input type="text" value="60" id="text2" style="width:26px" />秒
+<input type="button" value="开始" onclick="getdc1();"/>
+<input type="button" value="停止" onclick="getdcs();"/>
+<br />
+<br />
+首次字符数：<b id="pro2">0</b>
+ | 次数：<b id="pro1">0</b>
+<br />
+
+<p>说明：需使用<a href="crossdo.html">[跨域方法]</a>。选择“变动”检测网页源代码字符数的更改，“出现”“消失”需在文本框填入变动的字符。
+</p>
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+
+</body>
+</html>

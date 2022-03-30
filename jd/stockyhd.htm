@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="一号店库存查询,一号店哪有货,一号店有货地区"/>
+<meta name="description" content="一号店库存查询,一号店哪有货,一号店有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>一号店哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datayhd = [
+  {pro1:"1", sn:"华东|上海:"},
+  {pro1:"5", sn:"华东|江苏:"},
+  {pro1:"6", sn:"华东|浙江:"},
+  {pro1:"13", sn:"华东|安徽:"},
+  {pro1:"20", sn:"华南|广东:"},
+  {pro1:"21", sn:"华南|广西:"},
+  {pro1:"14", sn:"华南|福建:"},
+  {pro1:"22", sn:"华南|海南:"},
+  {pro1:"2", sn:"华北|北京:"},
+  {pro1:"4", sn:"华北|河北:"},
+  {pro1:"8", sn:"华北|内蒙古:"},
+  {pro1:"16", sn:"华北|山东:"},
+  {pro1:"32", sn:"华北|山西:"},
+  {pro1:"3", sn:"华北|天津:"},
+  {pro1:"18", sn:"华中|湖北:"},
+  {pro1:"19", sn:"华中|湖南:"},
+  {pro1:"17", sn:"华中|河南:"},
+  {pro1:"15", sn:"华中|江西:"},
+  {pro1:"9", sn:"东北|辽宁:"},
+  {pro1:"11", sn:"东北|黑龙江:"},
+  {pro1:"10", sn:"东北|吉林:"},
+  {pro1:"12", sn:"西南|四川:"},
+  {pro1:"7", sn:"西南|重庆:"},
+  {pro1:"24", sn:"西南|云南:"},
+  {pro1:"23", sn:"西南|贵州:"},
+  {pro1:"25", sn:"西南|西藏:"},
+  {pro1:"26", sn:"西北|陕西:"},
+  {pro1:"30", sn:"西北|宁夏:"},
+  {pro1:"27", sn:"西北|甘肃:"},
+  {pro1:"28", sn:"西北|青海:"},
+  {pro1:"29", sn:"西北|新疆:"},
+]; 
+
+ 
+function price_yhd() {
+  i = 0;     
+  priceyhd();
+}
+ 
+function priceyhd() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num6").value;  
+        script.src = "http://gps.yhd.com/restful/detail?mcsite=1&provinceId="+datayhd[i].pro1+"&pmId="+src+"&callback=jsonpyhd";
+        document.body.appendChild(script);  
+}
+
+function jsonpyhd(getyhd) {
+	    document.getElementById("ta1").value += (datayhd[i].sn + "库存:" + getyhd.currentStockNum + " " + getyhd.currentPrice + "元" + "\r\n");
+  		i++;
+  		if(i < datayhd.length) {priceyhd();}
+  		}
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【一号店有货地区|库存查询】</b></p>
+输入一号店ID:
+<input type="text" value="38545021" id="num6" style="width:100px" onkeyup="self['num6'].value=self['num6'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_yhd()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：一号店各地区ID不同，适用于查询有货地区ID库存数量。</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

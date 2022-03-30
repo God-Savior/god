@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东库存查询,京东哪有货,京东有货地区"/>
+<meta name="description" content="京东库存查询,京东哪有货,京东有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>京东哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datajd = [
+  {pro1:"2", city1:"78", sn:"华东|上海:"},
+  {pro1:"12", city1:"904", sn:"华东|江苏:"},
+  {pro1:"15", city1:"1158", sn:"华东|浙江:"},
+  {pro1:"14", city1:"1116", sn:"华东|安徽:"},
+  {pro1:"19", city1:"1601", sn:"华南|广东:"},
+  {pro1:"20", city1:"1715", sn:"华南|广西:"},
+  {pro1:"16", city1:"1303", sn:"华南|福建:"},
+  {pro1:"23", city1:"2121", sn:"华南|海南:"},
+  {pro1:"1", city1:"72", sn:"华北|北京:"},
+  {pro1:"5", city1:"142", sn:"华北|河北:"},
+  {pro1:"11", city1:"799", sn:"华北|内蒙古:"},
+  {pro1:"13", city1:"1000", sn:"华北|山东:"},
+  {pro1:"6", city1:"303", sn:"华北|山西:"},
+  {pro1:"3", city1:"51035", sn:"华北|天津:"},
+  {pro1:"17", city1:"1381", sn:"华中|湖北:"},
+  {pro1:"18", city1:"1482", sn:"华中|湖南:"},
+  {pro1:"7", city1:"412", sn:"华中|河南:"},
+  {pro1:"21", city1:"1827", sn:"华中|江西:"},
+  {pro1:"8", city1:"560", sn:"东北|辽宁:"},
+  {pro1:"8", city1:"560", sn:"东北|黑龙江:"},
+  {pro1:"8", city1:"560", sn:"东北|吉林:"},
+  {pro1:"22", city1:"1930", sn:"西南|四川:"},
+  {pro1:"4", city1:"113", sn:"西南|重庆:"},
+  {pro1:"25", city1:"2235", sn:"西南|云南:"},
+  {pro1:"24", city1:"2144", sn:"西南|贵州:"},
+  {pro1:"26", city1:"2951", sn:"西南|西藏:"},
+  {pro1:"27", city1:"2376", sn:"西北|陕西:"},
+  {pro1:"30", city1:"2628", sn:"西北|宁夏:"},
+  {pro1:"28", city1:"2487", sn:"西北|甘肃:"},
+  {pro1:"29", city1:"2580", sn:"西北|青海:"},
+  {pro1:"31", city1:"2652", sn:"西北|新疆:"},
+  {pro1:"42", city1:"2754", sn:"香港:"},
+  {pro1:"43", city1:"2770", sn:"澳门:"},
+  {pro1:"32", city1:"2768", sn:"台湾:"},
+  {pro1:"84", city1:"84", sn:"钓鱼岛:"},
+]; 
+
+ 
+function price_jd() {
+  i = 0;     
+  pricejd();
+}
+ 
+function pricejd() {
+        script = document.createElement("script");  
+        src = document.getElementById("num1").value;  
+        script.src = "http://c0.3.cn/stock?skuId="+src+"&venderId=0&cat=8888,8888,8888&area="+datajd[i].pro1+"_"+datajd[i].city1+"_0_0&buyNum=1&extraParam={%22originid%22:%221%22}&ch=1&callback=getStockCallback";  
+        script.charset = "gbk";
+		script.onerror = function(){pricejd();};
+		document.body.appendChild(script);
+}
+
+function getStockCallback(getjd) {
+  		if (getjd.stock.rn == -1)
+		{
+	    document.getElementById("ta1").value += (datajd[i].sn + getjd.stock.StockStateName + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datajd[i].sn + getjd.stock.StockStateName + "，剩余:" + getjd.stock.rn + "件" + "\r\n");
+		}
+  		i++;
+  		if(i < datajd.length) {pricejd();}
+  		}
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【京东有货地区|库存查询】</b></p>
+输入京东ID:
+<input type="text" value="" id="num1" style="width:100px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_jd()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：当剩余1~5件时显示库存数量。</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

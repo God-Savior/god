@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="国美库存查询,国美哪有货,国美有货地区"/>
+<meta name="description" content="国美库存查询,国美哪有货,国美有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>国美哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datagm = [
+  {pro1:"21010100", sn:"华东|上海:"},
+  {pro1:"23010100", sn:"华东|江苏:"},
+  {pro1:"22010100", sn:"华东|浙江:"},
+  {pro1:"24010100", sn:"华东|安徽:"},
+  {pro1:"31010100", sn:"华南|广东:"},
+  {pro1:"32010100", sn:"华南|广西:"},
+  {pro1:"25010100", sn:"华南|福建:"},
+  {pro1:"33010100", sn:"华南|海南:"},
+  {pro1:"11011400", sn:"华北|北京:"},
+  {pro1:"13080100", sn:"华北|河北:"},
+  {pro1:"15060100", sn:"华北|内蒙古:"},
+  {pro1:"26050100", sn:"华北|山东:"},
+  {pro1:"14080100", sn:"华北|山西:"},
+  {pro1:"12010100", sn:"华北|天津:"},
+  {pro1:"41010100", sn:"华中|湖北:"},
+  {pro1:"42010100", sn:"华中|湖南:"},
+  {pro1:"43010100", sn:"华中|河南:"},
+  {pro1:"44010100", sn:"华中|江西:"},
+  {pro1:"53010100", sn:"东北|辽宁:"},
+  {pro1:"51010100", sn:"东北|黑龙江:"},
+  {pro1:"52010100", sn:"东北|吉林:"},
+  {pro1:"71010100", sn:"西南|四川:"},
+  {pro1:"74010100", sn:"西南|重庆:"},
+  {pro1:"72010200", sn:"西南|云南:"},
+  {pro1:"73010100", sn:"西南|贵州:"},
+  {pro1:"75010100", sn:"西南|西藏:"},
+  {pro1:"64010100", sn:"西北|陕西:"},
+  {pro1:"61050100", sn:"西北|宁夏:"},
+  {pro1:"65010100", sn:"西北|甘肃:"},
+  {pro1:"63010100", sn:"西北|青海:"},
+  {pro1:"62010100", sn:"西北|新疆:"},
+  {pro1:"81010100", sn:"台湾:"},
+  {pro1:"82010100", sn:"香港:"},
+  {pro1:"83010100", sn:"澳门:"},
+  {pro1:"84010100", sn:"钓鱼岛:"},
+]; 
+
+ 
+function price_gm() {
+  i = 0;     
+  pricegm();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function pricegm() {
+      if (xhr) {
+        src = document.getElementById("num5").value;
+		xhr.open('get', "http://item.gome.com.cn/" + src + ".html", true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  gm1 = xhr.responseText
+		  gm2=gm1.substr(gm1.indexOf("prdInfo") + 10);  
+		  gm3=gm2.substr(0,gm2.indexOf("}")+1);
+		  gm4 = eval("(" + gm3 + ")");
+		  //document.getElementById("source").value = gm4.price;
+		  pricegm1();
+		  }
+    }
+        xhr.send();
+      }
+  		}
+ 
+function pricegm1() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        script.src = "http://g.gome.com.cn/ec/homeus/browse/store.jsp?callback=jQuerygm&goodsNo=" + gm4.skuNo + "&city="+datagm[i].pro1+"&skuType_p=" + gm4.skuType + "&sid=" + gm4.sku + "&pid=" + gm4.prdId;
+        document.body.appendChild(script);  
+}
+  
+function jQuerygm(getgm) {
+  		if (getgm.result == "Y")
+		{
+	    document.getElementById("ta1").value += (datagm[i].sn + "有货 " + getgm.price + "元" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datagm[i].sn + "无货 " + getgm.price + "元" + "\r\n");
+		}
+  		i++;
+  		if(i < datagm.length) {pricegm1();}
+  		}
+		
+
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【国美有货地区|库存查询】</b></p>
+<br />
+输入国美ID:
+<input type="text" value="9133881245-1122890751" id="num5" style="width:160px" onkeyup=""/>
+<input type="button" value="查询" onclick="clear1();price_gm()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：本工具使用IE浏览器或者Chrome浏览器使用"IE Tab"扩展程序，本地版需点击：允许阻止的内容，在线版需设置：Internet选项>安全>自定义级别>其它>通过域访问数据源>启用；Chrome浏览器需要在快捷方式 右键>属性>快捷方式>目标 链接后添加“ --disable-web-security”引号内字符，含空格，确定后重新打开，例如："C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

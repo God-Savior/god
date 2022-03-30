@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东抢优惠券工具"/>
+<meta name="description" content="京东抢优惠券工具"/>
+<meta name="author" content="http://cll.name/jd" />
+<meta name="referrer" content="never" />
+<title>京东抢优惠券工具</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+//http://coupon.m.jd.com/coupons/show.action?key=d11eb5af37f64d1e9c03da759711fa4e&roleId=11845351&to=m.jd.com
+//https://coupon.m.jd.com/center/receiveCoupon.json?couponId=1&roleId=12040212&actId=aa5a2718c93842c3b641e9998e662bec&callback=a1
+//https://s.m.jd.com/activemcenter/mfreecoupon/getcoupon?key=aa5a2718c93842c3b641e9998e662bec&roleId=12040212&callback=a1
+//"errmsg":"您还未登录","ret":2
+//https://api.m.jd.com/client.action?functionId=newBabelAwardCollection&body={"activityId":"1","from":"H5node","scene":"1","args":"key=d11eb5af37f64d1e9c03da759711fa4e,roleId=11845351","mitemAddrId":"","geo":{"lng":"","lat":""}}&client=wh5&clientVersion=1.0.0&sid=&uuid=&area=&_=&callback=jsonp
+
+/*
+function start1() {
+	$.ajax({
+		url: "https://s.m.jd.com/activemcenter/mfreecoupon/getcoupon?key="+num1.value+"&roleId="+num2.value+"&callback=a1",
+		type: "GET",
+		dataType: "jsonp",
+		jsonpCallback: 'a1',
+		cache: false,
+		success: function (d) {
+			console.log(d)
+		}
+	});
+}
+*/
+var t1;
+function Step1() {
+	document.getElementById("alertt").innerHTML = ""
+		var script = document.createElement("script");
+	//var src = document.getElementById("num1").value;
+	script.src = "https://s.m.jd.com/activemcenter/mfreecoupon/getcoupon?key="+num1.value+"&roleId="+num2.value+"&callback=cp1&_=" + new Date().getTime();
+	document.body.appendChild(script);
+	script.onerror = function () {Step1();};
+}
+function cp1(data1) {
+	//if (data1) {eval(data1)}}
+	var nowm = new Date();
+	mstime = ((nowm.getHours() < 10 ? "0" : "") + nowm.getHours() + ":" + (nowm.getMinutes() < 10 ? "0" : "") + nowm.getMinutes() + ":" + (nowm.getSeconds() < 10 ? "0" : "") + nowm.getSeconds() + "." + nowm.getMilliseconds());
+	console.log(data1.errmsg);
+	if (data1.ret == 2) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime; //未登录
+	} else if (data1.ret == 8) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //活动结束
+	} else if (data1.ret == 10) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //来早了
+		ct1();
+	} else if (data1.ret == 14) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //已领过
+	} else if (data1.ret == 15) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //今天已领过
+	} else if (data1.ret == 16) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //本时段已抢完
+	} else if (data1.ret == 17) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //已抢完
+	} else if (data1.ret == 39) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //专属
+	} else if (data1.ret == 145) {
+		document.getElementById("content").innerHTML = data1.errmsg + mstime;  //频繁
+		ct1();
+	} else if (data1.ret == 999) {
+		document.getElementById("content").innerHTML = "成功领取！" + mstime;  //成功
+	} else {
+		document.getElementById("content").innerHTML = "What? code:" + data1.ret + data1.errmsg +" "+ mstime;
+		ct1();
+	}
+}
+function ct1() {
+	window.clearTimeout(t1);
+	t1 = window.setTimeout(function () {Step1();}, time1.value * 1000);
+	//var now = new Date();
+	//document.getElementById("nowtime1").innerHTML = ((now.getHours() < 10 ? "0" : "") + now.getHours() + ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes() + ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds());
+}
+function Stop1() {
+	window.clearTimeout(t1);
+	//location.reload();
+}
+
+</script>
+
+</head>
+<body >
+<div align="center" style="width:730px;margin:0px auto;">
+<p align="center"><b>【京东抢优惠券工具】</b></p>
+
+<br />
+<a href="https://home.m.jd.com/myJd/newhome.action">登陆手机页</a>
+<br />
+key=<input type="text" id="num1" value="bd33dcc5284a48e7b0eee4765454de30" style="width:237px" />
+roleId=<input type="text" id="num2" value="12622139" style="width:67px" />
+间隔：<input type="text" value="0.1" id="time1" style="width:36px"/>秒
+<input type='button' value='开始' onclick='Step1();' />
+<input type='button' value='停止' onclick='Stop1();' />
+<input type="button" class="button gray" value="领券页" onclick="JavaScript:window.open('http://coupon.m.jd.com/coupons/show.action?key='+num1.value+'&roleId='+num2.value+'&to=m.jd.com')">
+<p>当前状态：<b id="content"></b> <font id="nowtime1"></font></p>
+
+<b id="alertt"></b>
+<br />
+<b id="btim"></b>
+<script type="text/javascript">
+  to_ie = document.getElementById('btim').innerText;
+  setInterval( "t_upd()", 100 );
+  function t_upd(){
+  set_tim( 'btim',8);
+  }
+  function set_tim(oid,shift){
+    d=new Date();
+    h_utc=d.getUTCHours();
+    if( shift!=0 && shift!=13 )
+      d.setUTCHours( h_utc + shift );
+    if( shift ==13 )
+      txt = d.toLocaleString();
+    else
+      txt = d.toUTCString();
+    txt=txt.replace("UTC", "");
+    txt=txt.replace("GMT", "");
+    if( to_ie )
+      document.getElementById(oid).innerText = txt;
+    else
+      document.getElementById(oid).textContent = txt;
+    delete d;
+    }
+</script>
+
+<p>
+</p>
+ 
+<p>使用说明：可能会增加黑号等级，谨慎使用。用此工具可减少手动刷新页面的加载时间，提高几率。适用于含key=和roleId=字符领券链接。请先登陆手机端网页，更改文本框字符为领券链接中key=和roleId=的字符，间隔时间过短会提示操作过快，活动提前一两秒点开始。确保系统时间准确，在时间设置里Internet时间推荐改为阿里云的时间服务器ntp1.aliyun.com。</p>
+
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="一号店库存查询,一号店哪有货,一号店有货地区"/>
+<meta name="description" content="一号店库存查询,一号店哪有货,一号店有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>一号店哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datayhd = [
+  {pro1:"1", sn:"华东|上海:"},
+  {pro1:"5", sn:"华东|江苏:"},
+  {pro1:"6", sn:"华东|浙江:"},
+  {pro1:"13", sn:"华东|安徽:"},
+  {pro1:"20", sn:"华南|广东:"},
+  {pro1:"21", sn:"华南|广西:"},
+  {pro1:"14", sn:"华南|福建:"},
+  {pro1:"22", sn:"华南|海南:"},
+  {pro1:"2", sn:"华北|北京:"},
+  {pro1:"4", sn:"华北|河北:"},
+  {pro1:"8", sn:"华北|内蒙古:"},
+  {pro1:"16", sn:"华北|山东:"},
+  {pro1:"32", sn:"华北|山西:"},
+  {pro1:"3", sn:"华北|天津:"},
+  {pro1:"18", sn:"华中|湖北:"},
+  {pro1:"19", sn:"华中|湖南:"},
+  {pro1:"17", sn:"华中|河南:"},
+  {pro1:"15", sn:"华中|江西:"},
+  {pro1:"9", sn:"东北|辽宁:"},
+  {pro1:"11", sn:"东北|黑龙江:"},
+  {pro1:"10", sn:"东北|吉林:"},
+  {pro1:"12", sn:"西南|四川:"},
+  {pro1:"7", sn:"西南|重庆:"},
+  {pro1:"24", sn:"西南|云南:"},
+  {pro1:"23", sn:"西南|贵州:"},
+  {pro1:"25", sn:"西南|西藏:"},
+  {pro1:"26", sn:"西北|陕西:"},
+  {pro1:"30", sn:"西北|宁夏:"},
+  {pro1:"27", sn:"西北|甘肃:"},
+  {pro1:"28", sn:"西北|青海:"},
+  {pro1:"29", sn:"西北|新疆:"},
+]; 
+
+ 
+function price_yhd() {
+  i = 0;     
+  priceyhd();
+}
+
+	xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+	
+    function priceyhd() {
+	src = document.getElementById("num5").value;
+      if (xhr) {
+        xhr.open('POST', "http://item.yhd.com/item/" + src, true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  yhd1 = xhr.responseText
+		  yhd2=yhd1.substr(yhd1.indexOf("detailparams") + 13);  
+		  yhd3=yhd2.substr(0,yhd2.indexOf("}")+1);
+		  yhd4 = eval("(" + yhd3 + ")");
+		  yhd5=yhd1.substr(yhd1.indexOf("productMercantId") + 25).split('"');
+		  yhd6=yhd1.substr(yhd1.indexOf("isShengxianProd") + 25).split('"');
+		  yhd7=yhd1.substr(yhd1.indexOf("deliveryPartitionId") + 29).split('"');
+		  yhd8=yhd1.substr(yhd1.indexOf("backCategoryId") + 23).split('"');
+		  //alert(yhd7);
+		  priceyhd2();
+      }
+    };
+        xhr.send();
+      } 
+    }
+
+function priceyhd2() {
+    	//http://item-home.yhd.com/item/ajax/ajaxGetStockInfo.do?callback=jsonp1423271461021&uid="+encodeURIComponent(encodeURIComponent(paramSignature))+"&productID="+productId+"&merchantId="+merchantId+"&productMercantId="+productMercantId+"&curProvinceId="+pro1+"&isYiHaoDian="+isYiHaoDian+"&isFreshProd="+isShengxianProd+"&deliveryPartitionId="+deliveryPartitionId+"&categoryId="+backCategoryId+"&countyId=&cityId="+city1
+		  //http://item-home.yhd.com/item/ajax/ajaxGetStockInfo.do?callback=jsonp1423271461021&uid=yERaaj5nk1WPRV%252BH41OpcQ%253D%253D&productID=36584610&merchantId=2&productMercantId=42793437&curProvinceId=11&isYiHaoDian=1&isFreshProd=0&deliveryPartitionId=&categoryId=960044&countyId=&cityId=109
+
+		  
+		  
+		  
+		
+		xhr.open('POST', "http://item-home.yhd.com/item/ajax/ajaxGetStockInfo.do?uid="+encodeURIComponent(encodeURIComponent(yhd4.paramSignature))+"&productID="+yhd4.productId+"&merchantId="+yhd4.merchantId+"&productMercantId="+yhd5[0]+"&curProvinceId="+datayhd[i].pro1+"&isYiHaoDian="+yhd4.isYiHaoDian+"&isFreshProd="+yhd6[0]+"&deliveryPartitionId="+yhd7[0]+"&categoryId="+yhd8[0]+"&countyId=&cityId=", true);
+		xhr.withCredentials = true;
+		xhr.setRequestHeader( "P3P" , 'CP="NOI DEVa TAIa OUR BUS UNI"' );
+		xhr.setRequestHeader('Cookie', 'provinceId='+datayhd[i].pro1);
+		document.cookie="'provinceId='+datayhd[i].pro1;path=/;domain=yhd.com";
+		xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  var data1 = eval("(" + xhr.responseText +")"); 
+
+		if (data1.code == 0 || data1.data == "无货")
+		{
+	    document.getElementById("ta1").value += (datayhd[i].sn + "无货" + "\r\n");
+		}
+		else
+		{
+	    document.getElementById("ta1").value += (datayhd[i].sn + "有货" + "\r\n");
+		}
+		i++;
+  		if(i < datayhd.length) {priceyhd2();}
+		}
+    }
+        xhr.send();
+	}
+
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【一号店有货地区|库存查询】</b></p>
+输入一号店ID:
+<input type="text" value="49610883" id="num5" style="width:100px" onkeyup="self['num5'].value=self['num5'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_yhd()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p>说明：当剩余1~5件时显示库存数量。</p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

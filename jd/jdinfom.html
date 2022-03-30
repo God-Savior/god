@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东商品批量查看,标题,图片,价格,运费,加入购物车,筛选"/>
+<meta name="description" content="京东商品批量查看 标题 图片 价格 运费 加入购物车 筛选"/>
+<meta name="author" content="http://cll.name" />
+<meta name="referrer" content="never" />
+<title>京东商品批量查看 标题 图片 价格 运费 加入购物车 筛选</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+function line1() {
+result1.innerHTML=""
+i = 0;
+ii = 1;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+function line2(){
+	if (i < arr.length){
+		if (arr[i] != ""){
+			add1();
+			jdprom(ii,arr[i]);
+			jdmprice(ii);
+			if (arr[i].length>9){jdstock(ii);};
+			//document.getElementById("prog1").innerText = ("["+(i+1) + "/" + (arr.length)+"] "+arr[i]);
+			i++;
+			ii++;
+			line2();
+		}
+		else {i++; line2();}
+	}
+	//else {alert("完成");}
+}
+
+/*
+function jdprom(domnum,nid){
+	var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+	if (xhr) {
+	xhr.open('get', "http://item.m.jd.com/ware/detail.json?wareId="+nid, true);
+	xhr.onreadystatechange = function () {
+	if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			
+			var promdata = eval("(" + xhr.responseText +")");
+			document.getElementById("iaa"+domnum).href=("http://cart.jd.com/gate.action?pid="+nid+"&pcount=1&ptype=1");
+			document.getElementById("in"+domnum).src=(promdata.ware.chatUrl.replace(/(n3)/g, "n5"));
+			document.getElementById("iai"+domnum).text=(promdata.ware.wname);
+			document.getElementById("iai"+domnum).href=("http://item.jd.com/"+nid+".html");
+			*//*
+			result1.innerHTML+= ii+"、<b id='pm"+ii+"'></b>"+"<a href='"+"http://cart.jd.com/gate.action?pid="+arr[i]+"&pcount=1&ptype=1"+"'>＋购物车</a>" + "<img id='in"+ii+"' src='" + promdata.ware.chatUrl.replace(/(n3)/g, "n5") + "'/>" + " <a id='iai"+ii+"' href='"+"http://item.jd.com/"+arr[i]+".html" + "'>"+ promdata.ware.wname + "</a></br>";
+			
+			i++;
+			ii++;
+			line2();
+			*//*
+			
+		}
+	//else {jdprom1();}
+	}
+	}
+	}
+xhr.send();
+}
+*/
+
+function jdprom(domnum,nid){
+    var jsonp = document.createElement("script");
+    jsonp.src = "https://yx.3.cn/service/info.action?callback=jsonpA"+domnum+"&g_ty=ls&g_tk=1&ids="+nid+"&_="+ new Date().getTime();
+	jsonp.onerror = function(){jdmprice(domnum,nid);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jsonpA'+domnum+'(promdata){document.getElementById("iaa'+domnum+'").href=("http://cart.jd.com/gate.action?pid='+nid+'&pcount=1&ptype=1");document.getElementById("in'+domnum+'").src=("https://img1.360buyimg.com/n1/s54x54_"+promdata['+nid+'].imagePath);document.getElementById("iai'+domnum+'").text=(promdata['+nid+'].name);document.getElementById("iai'+domnum+'").href=("http://item.jd.com/'+nid+'.html");}';
+	document.body.appendChild(myScript);
+}
+
+
+function jdmprice(numn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://pm.3.cn/prices/mgets?skuids="+arr[i]+"&origin=2&callback=jQuerym"+numn+"&_="+ new Date().getTime();
+	jsonp.onerror = function(){jdmprice(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQuerym'+numn+'(datam1){document.getElementById("pm'+numn+'").innerText=(datam1[0].p*text1.value);}';
+	document.body.appendChild(myScript);
+}
+
+function jdstock(numn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://c0.3.cn/stock?skuId="+arr[i]+"&venderId=0&cat=8888,8888,8888&area=22_1930_50947_0&buyNum=1&extraParam={%22originid%22:%221%22}&ch=1&callback=getStock"+numn+"&_="+ new Date().getTime();
+	jsonp.charset = "gbk";
+	jsonp.onerror = function(){jdmprice(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function getStock'+numn+'(data){if(data.stock.dcashDesc){document.getElementById("pd'+numn+'").innerHTML=(data.stock.dcashDesc);if(data.stock.dcashDesc.indexOf("免运费")>=0){document.getElementById("pd'+numn+'").style.background="red";}}}';
+	document.body.appendChild(myScript);
+}
+
+
+function add1(){
+	var htmlNode = document.createElement('p');
+	htmlNode.id="pnum"+ii;
+	htmlNode.style.height= "50px";
+	htmlNode.innerHTML = ii+"、<b id='pm"+ii+"'></b>"+"<a id='iaa"+ii+"' href=''>＋购物车</a>" + " <b id='pd"+ii+"'></b>" + "<img id='in"+ii+"' src='' style='position:relative; z-index:-1;'/>" + " <a id='iai"+ii+"' href=''>" + "</a></br>";
+	document.getElementById("result1").appendChild(htmlNode);
+	//ii++;
+}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:1000px;margin:0px auto;background:">
+<p align="center"><b>【京东商品批量查看】</b></p>
+<br />
+<a href="http://cart.jd.com/cart">[购物车]</a>
+<br />
+<div style="width:150px;float:left;">
+商品ID：
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+<br />
+<textarea id="ta1" cols="12" rows="18" style=""></textarea>
+</div>
+<div align="left" style="margin-left:150px; width:850px;">
+价格比例：<input type="text" value="1" id="text1" style="width:28px" />
+<input type="button" value="开始" onclick="line1();"/>
+<!--进度：<b id="prog1">[0/0] 888888</b>-->
+<div id="result1"></div>
+</div>
+<div style="width:100%; float:left;"> 
+<br />
+
+<br />
+<p>说明：经过初步筛选后的商品（如叠加优惠商品），输入到左边文本框，每行一个京东商品ID，然后开始。可批量查看标题、图片、手机端价格，选择合适商品加入购物车（滚轮中间点击后台打开页面更方便），点击右边标题查看PC页面。设置价格比例（如0.5）方便查看活动折扣后的价格。如果是入驻卖家可显示运费，包含“免运费”字符的，为红色背景色。
+</p>
+
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/" target="_blank">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</div>
+<div id="a1"></div>
+</body>
+</html>

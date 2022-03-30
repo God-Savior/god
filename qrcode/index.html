@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="字符、链接转二维码,Text,Link,to,QR-code"/>
+<meta name="description" content="字符、链接转二维码 | Text, Link to QR code - JavaScript软件,程序"/>
+<meta name="author" content="http://cll.name" />
+<title>字符、链接转二维码 | Text, Link to QR code - JavaScript软件,程序</title>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script src="qrcode.js"></script>
+
+</head>
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【字符、链接转二维码】</b></p>
+<p><textarea type="text" id="qr" cols="60" rows="5" onkeyup="num()" onchange="num()">http://www.cll.name/</textarea>
+字符数：<font id="num1"></font></p>
+<p>尺寸：<input type="text" id="qrw" style="width:26px" value="256"/>*<input type="text" id="qrl" style="width:26px" value="256"/>
+<button onclick="getqr()">生成</button></p>
+<div id="qr_code" style="width:256px;height:256px"></div>
+<script>
+function getqr(){
+	qr_code.innerText="";
+	qr_code.style.width = qrw.value + 'px';
+	qr_code.style.height = qrw.value + 'px';
+	var qrcode = new QRCode(qr_code, {
+		width : qrw.value,
+		height : qrl.value
+	});
+	qrcode.makeCode(qr.value);
+}
+getqr();
+function num(){num1.innerText = qr.value.length;}
+num();
+</script>
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32607238-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

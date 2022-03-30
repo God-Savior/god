@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="author" content="http://cll.name/jd" />
+<meta name="referrer" content="never" />
+<title></title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<script>
+$.ajax({
+    type: "GET",
+    url: "http://www.cll.name/p/phtm.php?callback=?&_=" + new Date().getTime(),
+    type:"get",
+    dataType:"jsonp",
+    data:{
+        url:"https%3A%2F%2Ffanqiang.network%2Ffree-v2ray"
+    },
+    /*success: function (data) {
+       $("body").append(data);
+    },*/
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+         console.log(errorThrown);
+    }
+
+}).done(function(page1){
+    page1 = decodeURIComponent(page1.htm);
+	//$("body").append(page1);
+	arr1="['";
+	$(page1).find("tbody tr").each(function(){$(this).find("td").each(function(i){if(i>0&&i<6){arr1+=$(this).html()+"#"}else if(i==6){arr1+=$(this).html()+"','"}})+",,,,,"});
+	arr1+="']";
+	arr2=eval(arr1);
+	console.log(arr2);
+	vm3="";
+	for (i = 0; i < arr2.length; i++){
+		vm1=arr2[i].split('#');	
+		vm2='{"v": "2","ps": "","add": "'+vm1[0]+'","port": "'+vm1[1]+'","id": "'+vm1[2]+'","aid": "0","net": "'+vm1[3]+'","type": "none","host": "","path": "'+vm1[4]+'","tls": "'+vm1[5]+'"}';
+		vm3+='vmess://'+window.btoa(vm2)+'\r\n';
+		
+	}
+	//console.log(vm3);
+	document.body.innerHTML = vm3;
+});
+
+
+/*
+
+function Step1() {
+	var script = document.createElement("script");
+	script.src = "http://www.cll.name/p/p.php?url=https%3A%2F%2Ffanqiang.network%2Ffree-v2ray&callback=code1&_=" + new Date().getTime();
+	document.body.appendChild(script);
+	script.onerror = function () {Step1();};
+}
+function code1(data1) {
+	//if (data1) {eval(data1)}}
+	//console.log(data1);
+	if (data1) {
+		document.getElementById("s1").innerHTML = data1;
+	}
+}
+
+Step1()*/
+</script>
+</body>
+</html>

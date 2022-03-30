@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="苏宁库存查询,苏宁哪有货,苏宁有货地区"/>
+<meta name="description" content="苏宁库存查询,苏宁哪有货,苏宁有货地区"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>苏宁哪有货|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datasn = [
+  {pro1:"9264", sn:"华东|上海:"},
+  {pro1:"9173", sn:"华东|江苏:"},
+  {pro1:"9315", sn:"华东|浙江:"},
+  {pro1:"9001", sn:"华东|安徽:"},
+  {pro1:"9041", sn:"华南|广东:"},
+  {pro1:"9063", sn:"华南|广西:"},
+  {pro1:"9018", sn:"华南|福建:"},
+  {pro1:"9085", sn:"华南|海南:"},
+  {pro1:"9017", sn:"华北|北京:"},
+  {pro1:"9095", sn:"华北|河北:"},
+  {pro1:"9211", sn:"华北|内蒙古:"},
+  {pro1:"9227", sn:"华北|山东:"},
+  {pro1:"9245", sn:"华北|山西:"},
+  {pro1:"9281", sn:"华北|天津:"},
+  {pro1:"9135", sn:"华中|湖北:"},
+  {pro1:"9151", sn:"华中|湖南:"},
+  {pro1:"9106", sn:"华中|河南:"},
+  {pro1:"9188", sn:"华中|江西:"},
+  {pro1:"9197", sn:"东北|辽宁:"},
+  {pro1:"9122", sn:"东北|黑龙江:"},
+  {pro1:"9164", sn:"东北|吉林:"},
+  {pro1:"9265", sn:"西南|四川:"},
+  {pro1:"9325", sn:"西南|重庆:"},
+  {pro1:"9301", sn:"西南|云南:"},
+  {pro1:"9076", sn:"西南|贵州:"},
+  {pro1:"8999", sn:"西南|西藏:"},
+  {pro1:"9254", sn:"西北|陕西:"},
+  {pro1:"9326", sn:"西北|宁夏:"},
+  {pro1:"9028", sn:"西北|甘肃:"},
+  {pro1:"9219", sn:"西北|青海:"},
+  {pro1:"9289", sn:"西北|新疆:"},
+]; 
+
+ 
+function price_sn() {
+  i = 0;     
+  pricesn();
+}
+ 
+function pricesn() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num1").value;  
+        script.src = "http://www.suning.com/webapp/wcs/stores/ItemPrice/000000000"+src+"__"+datasn[i].pro1+"__1.html?callback=showSaleStatus";
+		// 1PC 2mobile
+		script.onerror = function(){pricesn();};
+        document.body.appendChild(script);  
+}
+  
+function showSaleStatus(getsn) {
+  		
+		if (getsn.saleInfo[0].invStatus == 1)
+		{
+	    document.getElementById("ta1").value += (datasn[i].sn + "有货 " + getsn.saleInfo[0].promotionPrice + "元" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datasn[i].sn + "无货 " + getsn.saleInfo[0].promotionPrice + "元" + "\r\n");
+		}
+  		i++;
+  		if(i < datasn.length) {pricesn();}
+  		}
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【苏宁有货地区|库存查询】</b></p>
+输入苏宁ID:
+<input type="text" value="121284098" id="num1" style="width:100px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_sn()"/>
+<br />
+<br />
+<textarea id="ta1" cols="25" rows="36" readonly="readonly">
+</textarea>
+
+<br />
+<p></p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

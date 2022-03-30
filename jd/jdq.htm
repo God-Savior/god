@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东抢购工具,京东降价提醒,京东降价通知"/>
+<meta name="description" content="京东抢购工具,京东降价提醒,京东降价通知"/>
+<meta name="author" content="http://cll.name/jd" />
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+<meta HTTP-EQUIV="expires" CONTENT="0"> 
+<title>京东抢购辅助工具 - 降价提醒|价格监控|降价通知</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+ step=0
+ function flash_title()
+ {
+  step++      
+  if (step%2==0) {document.title='【快抢！！！】京东抢购辅助工具';
+  document.bgColor = '#000000';}
+  else if (step%2==1) {document.title='【　　　　　】京东抢购辅助工具';
+  document.bgColor = '#FF0000';}
+  clear = setTimeout("flash_title()",200);
+  //if (step==1) {setTimeout("window.clearTimeout(clear);document.bgColor = '#FFFFFF';document.title='京东抢购辅助工具';step=0",6000);}
+  if (step>=30) {window.clearTimeout(clear);document.bgColor = '#FFFFFF';document.title='京东抢购辅助工具';step=0}
+ }
+</script>
+
+<script type="text/javascript">
+    var t1;
+	function Step1()
+    {
+        document.getElementById("alertt").innerHTML = ""
+		var script = document.createElement("script");
+        //var src = document.getElementById("num1").value;  
+        script.src = "http://pm.3.cn/prices/mgets?skuids="+num1.value+"&origin=2&callback=jQuerym&_=" + new Date().getTime();  
+        document.body.appendChild(script);
+		script.onerror = function(){Step1();};
+    }
+    function jQuerym(data1) {
+	var dprice = eval(document.getElementById("dprice").value);
+	if (data1[0].p <= dprice && data1[0].p >= 0) {
+		if (document.getElementById("_sh").checked){
+		  flash_title();
+		  var nowm = new Date();
+		  mstime = ((nowm.getHours()<10?"0":"")+nowm.getHours()+":"+(nowm.getMinutes()<10?"0":"")+nowm.getMinutes()+":"+(nowm.getSeconds()<10?"0":"")+nowm.getSeconds()+"."+nowm.getMilliseconds());
+		  document.getElementById("alertt").innerHTML = "Baby! 现在 "+data1[0].p+" 元！快抢！！！"+mstime;
+		}
+		else {
+		 alert("Baby! 现在 "+data1[0].p+" 元！快买！");
+		}
+	}
+	else {
+		window.clearTimeout(t1);
+	    document.getElementById("content").innerText=("价格：" + data1[0].p);
+		//var second1 = document.getElementById("time1").value;
+		t1 = window.setTimeout(function(){Step1();}, time1.value*1000);
+		var now = new Date();
+		document.getElementById("nowtime1").innerHTML = ((now.getHours()<10?"0":"")+now.getHours()+":"+(now.getMinutes()<10?"0":"")+now.getMinutes()+":"+(now.getSeconds()<10?"0":"")+now.getSeconds());
+	}
+    }
+
+</script>
+
+</head>
+<body >
+<div align="center" style="width:730px;margin:0px auto;">
+<p align="center"><b>【京东抢购辅助工具】</b></p>
+
+<form>提醒方式：
+<input type="radio" name="ale" id="_ale" />弹窗
+<input type="radio" checked="checked" name="ale" id="_sh" />显示
+</form>
+
+<br />
+
+京东ID：<input type="text" id="num1" value="" style="width:88px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,''); "  onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type='button' value='开始' onclick='Step1();' /> | 当价格低于<input id="dprice" type="text" value="10" style="width:60px"/>元时提醒
+间隔：<input type="text" value="0.001" id="time1" style="width:36px"/>秒
+<p>当前价格：<b id="content"></b> <font id="nowtime1"></font></p>
+
+<b id="alertt"></b>
+<br />
+<br />
+<b id="btim"></b>
+<script type="text/javascript">
+  to_ie = document.getElementById('btim').innerText;
+  setInterval( "t_upd()", 100 );
+  function t_upd(){
+  set_tim( 'btim',8);
+  }
+  function set_tim(oid,shift){
+    d=new Date();
+    h_utc=d.getUTCHours();
+    if( shift!=0 && shift!=13 )
+      d.setUTCHours( h_utc + shift );
+    if( shift ==13 )
+      txt = d.toLocaleString();
+    else
+      txt = d.toUTCString();
+    txt=txt.replace("UTC", "");
+    txt=txt.replace("GMT", "");
+    if( to_ie )
+      document.getElementById(oid).innerText = txt;
+    else
+      document.getElementById(oid).textContent = txt;
+    delete d;
+    }
+</script>
+
+<p>使用说明：可能会增加黑号等级，谨慎使用，使用不同浏览器代理IP。监控移动端价格，用于知道降价时间的商品，如每天5场的掌上秒杀商品。在另一窗口提前几十秒到订单提交页面，当将要降价时提前10多秒点击开始，将会不断监控价格变化，当看到提醒立即点击提交，不适用抢购键商品。</p>
+
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

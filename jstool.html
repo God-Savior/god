@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="author" content="http://cll.name/jd" />
+<title></title>
+</head>
+
+<body>
+
+<p align="center"><b>【js转换工具箱】</b></p>
+<p><b>getTime()1970 年 1 月 1 日至今的毫秒数Unix时间戳与日期时间字符串互相转换</b></p>
+<button onclick="time2()"/>当前时间毫秒数：</button>
+<input type="text" id="num1" value="" style="width:108px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');timec()"  onchange="this.value=this.value.replace(/\D/g,'');timec()"/>
+<button onclick="timec()"/>转换成时间：</button>
+<input type="text" id="t3" value="" style="width:150px" onkeyup=""  onchange=""/>
+<button onclick="time3()"/>时间转换成毫秒数：</button>
+<b id="show3">3</b>
+<br>
+<p><b>url编码转换 全编码包含转换;/?:@&=+$,#</b></p>
+<textarea name="" id="tx1" placeholder="here" style="height:80px; width:500px" onkeyup="" onchange="">
+https://www.baidu.com/s?wd=%E4%BD%A0%E5%A5%BD</textarea>
+<br>
+<button onclick="c1()"/>解码↓</button>
+<button onclick="c3()"/>全解码↓</button>
+<button onclick="c2()"/>编码↑</button>
+<button onclick="c4()"/>全编码↑</button>
+<br>
+<textarea name="" id="tx2" placeholder="here" style="height:80px; width:500px" onkeyup="" onchange=""></textarea>
+<br>
+<p><b>Unicode编码转换</b></p>
+<textarea id="code1" style="width: 500px; height: 80px;">\u0068\u0074\u0074\u0070\u003a\u002f\u002f\u0063\u006c\u006c\u002e\u006e\u0061\u006d\u0065\u002f</textarea>
+<br>
+<input onclick="jm()" type="button" value="解码↓">
+<input onclick="bm()" type="button" value="编码↑">
+<br>
+<textarea id="code2" style="width: 500px; height: 80px;">👑�𝌆</textarea>
+<p><b>html编码转换</b></p>
+<textarea id="code4" style="width: 500px; height: 80px;">👑�𝌆</textarea>
+<br>
+<input onclick="bm1()" type="button" value="编码↓">
+<br>
+<textarea id="code3" style="width: 500px; height: 80px;"></textarea>
+<br>
+<input onclick="jm1()" type="button" value="解码↓">
+<br>
+<b id="show5">5</b>
+
+<script>
+function timec() {
+	var ms = eval(document.getElementById("num1").value);
+	var d = new Date(ms);
+	var str = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + ((d.getHours()<10?"0":"")+d.getHours()+":"+(d.getMinutes()<10?"0":"")+d.getMinutes()+":"+(d.getSeconds()<10?"0":"")+d.getSeconds()+"."+("00"+d.getMilliseconds()).slice(-3));
+	//alert(d)
+	//alert(d.toLocaleString())
+	document.getElementById("t3").value = str;
+}
+
+function time2() {
+	var d = new Date();
+	var t = d.getTime();
+	document.getElementById("num1").value = t;
+}
+
+function time3() {
+	var d = new Date(t3.value);
+	var t = d.getTime();
+	document.getElementById("show3").innerText = t;
+}
+
+time2();
+timec();
+
+function c1() {
+	document.getElementById("tx2").value = decodeURI(tx1.value);
+}
+function c2() {
+	document.getElementById("tx1").value = encodeURI(tx2.value);
+}
+function c3() {
+	document.getElementById("tx2").value = decodeURIComponent(tx1.value);
+}
+function c4() {
+	document.getElementById("tx1").value = encodeURIComponent(tx2.value);
+}
+
+</script>
+
+<script>
+function decToHex(str) {
+	var str1 =''; 
+	for(var i=0;i<str.length;i++){
+	str1+="\\u"+("00"+str[i].charCodeAt(0).toString(16)).slice(-4);
+	}
+	return str1;
+	/*var res = [];
+	for (var i = 0; i < str.length; i++){
+		res[i] = ("00" + str.charCodeAt(i).toString(16)).slice(-4);
+	}
+	return "\\u" + res.join("\\u");*/
+}
+function bm() {
+	document.getElementById('code1').value = decToHex(document.getElementById('code2').value);
+}
+function jm() {
+	document.getElementById('code2').value = eval("'"+document.getElementById('code1').value+"'");
+	//document.getElementById('code2').value = unescape(document.getElementById('code1').value.replace(/\\u/g, "%u"));
+}
+</script>
+
+<script>
+function bma(str) {
+	var str1 =''; 
+	for(var i=0;i<str.length;i++){
+	str1+="&#"+str[i].charCodeAt(0);
+	}
+	return str1;
+}
+//String.fromCharCode(65,66,67)
+function bm1() {
+	document.getElementById('code3').value = bma(document.getElementById('code4').value);
+}
+function jm1() {
+	document.getElementById('show5').innerHTML = document.getElementById('code3').value;
+	//document.getElementById('code2').value = unescape(document.getElementById('code1').value.replace(/\\u/g, "%u"));
+}
+</script>
+
+<script>/*
+!function(){function e(e,t,n){return Number(e.getAttribute(t))||n}function t(){for(r.clearRect(0,0,h,s),a=[{x:0,y:.7*s+u},{x:0,y:.7*s-u}];a[1].x<h+u;)n(a[0],a[1])}function n(e,t){r.beginPath(),r.moveTo(e.x,e.y),r.lineTo(t.x,t.y);var n=t.x+(2*p()-.25)*u,o=i(t.y);r.lineTo(n,o),r.closePath(),m-=x/-50,r.fillStyle="#"+(127*y(m)+128<<16|127*y(m+x/3)+128<<8|127*y(m+x/3*2)+128).toString(16),r.fill(),a[0]=a[1],a[1]={x:n,y:o}}function i(e){return l=e+(2*p()-1.1)*u,l>s||l<0?i(e):l}var o=document.getElementsByTagName("script"),c=o[o.length-1];config={z:e(c,"zIndex",-1),a:e(c,"alpha",.6),s:e(c,"size",90)};var a,l,d=document.createElement("canvas"),r=d.getContext("2d"),g=window.devicePixelRatio||1,h=window.innerWidth,s=window.innerHeight,u=config.s,f=Math,m=0,x=2*f.PI,y=f.cos,p=f.random;d.width=h*g,d.height=s*g,r.scale(g,g),r.globalAlpha=config.a,d.style.cssText="position:fixed;top:0;left:0;z-index: "+config.z+";width:100%;height:100%;pointer-events:none;",document.getElementsByTagName("body")[0].appendChild(d),document.onclick=t,document.ontouchstart=t,t()}();
+*/</script>
+
+</body>
+</html>

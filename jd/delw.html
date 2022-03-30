@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="删除,超出,小于,包含,不含,字符,重复行,工具,JavaScript,软件,程序"/>
+<meta name="description" content="删除 超出|小于|包含|不含 字符 重复行工具 - JavaScript软件,程序"/>
+<meta name="author" content="http://cll.name" />
+<title>删除 超出|小于|包含|不含 字符 重复行工具 - JavaScript软件,程序</title>
+<base target="_blank"/>
+
+<script>
+
+function line1(){
+i = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n");
+arrn=arr.length;
+text1a=document.getElementById("text1").value;
+text2a=document.getElementById("text2").value;
+arrall = "";
+if (document.getElementById("_dy").checked){
+	run1 = "arr[i].length >= text1a";
+	line2();
+}
+else if (document.getElementById("_xy").checked){
+	run1 = "arr[i].length <= text1a";
+	line2();
+}
+else if (document.getElementById("_ic").checked){
+	run1 = "arr[i].indexOf(text2a) >= 0";
+	line2();
+}
+else if (document.getElementById("_oc").checked){
+	run1 = "arr[i].indexOf(text2a) < 0";
+	line2();
+}
+else if (document.getElementById("_dr").checked){
+	var arr2 = arr;
+	//console.log(arr2)
+	arr2 = unique(arr2);
+	//console.log(arr2)
+	for (var ii=0;ii<arr2.length;ii++){arrall +=arr2[ii] + "\r\n";}
+	finish();
+}
+}
+
+function line2(){
+if (i < arr.length){
+ if (arr[i] != ""){
+  if (eval(run1)){
+	i++;
+	line2();
+  }
+  else {
+	arrall += (arr[i] + "\r\n");
+	i++;
+	line2();
+    }
+ }
+ else {i++; line2();}
+}
+else {
+finish();
+}
+}
+
+function finish(){
+document.getElementById("ta2").value += arrall;
+var arr3 = document.getElementById("ta2").value.split("\n")
+document.getElementById("prog1").innerText = arrn +" | "+ (arr3.length - 1);
+alert("完成");
+}
+
+function unique(arr){
+    var result = [], hash = {};
+    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+        if (!hash[elem]) {
+            result.push(elem);
+            hash[elem] = true;
+        }
+    }
+    return result;
+}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:800px;margin:0px auto;background:">
+<p align="center"><b>删除 超出|小于|包含|不含 字符 重复行工具</b></p>
+<br/>
+
+<form><b>清除</b>
+<input type="radio" checked="checked" name="aaa" id="_dr" />重复 <b>| 或</b>
+<input type="radio" name="aaa" id="_dy" />大于&等于
+<input type="radio" name="aaa" id="_xy" />小于&等于
+<input type="text" value="8" id="text1" style="width:18px" />位数 <b>| 或</b>
+<input type="radio" name="aaa" id="_ic" />包含
+<input type="radio" name="aaa" id="_oc" />不含
+<input type="text" value="abc" id="text2" style="width:50px" />字符 
+<b>行</b>
+<br/>
+<p><input type="button" value="开始" onclick="line1();"/> 行数：<b id="prog1"></b></p>
+</form>
+
+<div style="width:310px;float:left;">
+每行一字符串：<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+<br/>
+<textarea id="ta1" cols="26" rows="38" style="word-wrap:normal;overflow:scroll">
+123456
+1234567
+12345678
+12345678
+123456789
+abcdef
+abcdefg
+abcdefgh
+abcdefghi
+</textarea>
+</div>
+<div style="width:310px;">
+结果：
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta2').value=''"/>
+<br/>
+<textarea id="ta2" cols="26" rows="38" readonly="readonly" style="word-wrap:normal;overflow:scroll">
+</textarea>
+</div>
+<br />
+<br />
+
+<p>说明：IE处理速度快，IE11测试数据限制5637行以内不会出错。Chrome过多数据卡顿，数据最好在10000行以内。
+</p>
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+
+</body>
+</html>

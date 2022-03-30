@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东商品详细,京东活动时间"/>
+<meta name="description" content="京东商品详细,京东活动时间"/>
+<meta name="author" content="https://cll.name/jd" />
+<title>京东商品详细信息查询 - 活动时间|价格查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script src="https://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+    function jdpcprice()
+    {
+        var jsonp = document.createElement("script");
+        jsonp.type = "text/javascript";
+        var src = document.getElementById("num1").value;
+        jsonp.src = "https://p.3.cn/prices/mgets?type=1&area=22_1930_50947_0&pdtk=&pduid=&pdpin=&pdbp=0&skuIds=J_"+src+"&callback=jdpcp&_=";
+        document.body.appendChild(jsonp);
+    }//https://p.3.cn/prices/get?skuid=J_"+src+"&pduid=88888888&callback=jdpcp
+    function jdpcp(data1) {
+	    document.getElementById("p1").innerText=(data1[0].p+ "元");
+    }
+	
+	function pricewx()
+    {
+        var jsonp = document.createElement("script");
+        var src = document.getElementById("num1").value;
+        jsonp.src = "https://pe.3.cn/prices/mgets?origin=5&skuids="+src+"&callback=jQuerywx"; //weixin 5
+        document.body.appendChild(jsonp);
+    }
+    function jQuerywx(data2) {
+	    document.getElementById("p2").innerText=(data2[0].p+ "元");
+    }
+		
+    function priceqq()
+    {
+        var jsonp = document.createElement("script");
+        var src = document.getElementById("num1").value;
+        jsonp.src = "https://pe.3.cn/prices/mgets?origin=4&skuids="+src+"&callback=jQueryqq"; //weixin 5
+        document.body.appendChild(jsonp);
+    }
+    function jQueryqq(data12) {
+	    document.getElementById("p12").innerText=(data12[0].p+ "元");
+    }
+		
+    function jdmprice()
+    {
+        var jsonp = document.createElement("script");
+        jsonp.type = "text/javascript";
+        var src = document.getElementById("num1").value;
+        jsonp.src = "https://pm.3.cn/prices/mgets?skuids="+src+"&origin=2&callback=jQuerym&_=";
+        document.body.appendChild(jsonp);
+    }
+    function jQuerym(data10) {
+	    document.getElementById("p10").innerText=(data10[0].p+ "元");
+    }
+		
+	/*function jdtitled()  
+    {  
+        var jsonp = document.createElement("script");  
+        jsonp.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        jsonp.src = "https://ad.3.cn/ads/mgets?callback=jQueryt&skuids=AD_"+src+"&areaCode=22_1930_4284&_="; //qq 
+        document.body.appendChild(jsonp);  
+    }  
+    function jQueryt(data3) {
+		document.getElementById("p3").innerHTML=(data3[0].ad);
+		}*/
+		
+	function jdstock() {
+		var script = document.createElement("script");
+        var src = document.getElementById("num1").value;  
+        script.src = "https://c0.3.cn/stock?skuId="+src+"&venderId=0&cat=8888,8888,8888&area=22_1930_50947_0&buyNum=1&extraParam={%22originid%22:%221%22}&ch=1&callback=getStockCallback&_=";
+		script.charset = "gbk";
+        document.body.appendChild(script);
+		}
+	function getStockCallback(data4) {
+		document.getElementById("p4").innerHTML = ""
+		data4a = data4
+		stockCallback2();
+		if (!data4.stock.D){
+		document.getElementById("p4").innerHTML += (" 店铺：" +'<a href="'+ data4.stock.self_D.url+'" target="_blank">'+data4.stock.self_D.vender+'</a>' + " 配送：" + data4.stock.self_D.deliver)
+		}
+		else if (!data4.stock.self_D){
+		document.getElementById("p4").innerHTML += (" 店铺：" +'<a href="'+ data4.stock.D.url+'" target="_blank">'+data4.stock.D.vender+'</a>' + " 配送：" + data4.stock.D.deliver)
+		}
+
+    }
+	function stockCallback2() {
+		if (data4a.stock.dcashDesc) {
+		document.getElementById("p4").innerHTML += (" 非自营 ") + data4a.stock.dcashDesc;
+		}
+		else {
+		document.getElementById("p4").innerHTML += (" 京东配送 ");
+		document.getElementById("p4").innerHTML += data4a.stock.eir[0].showName;
+		}
+
+    }
+	
+	
+	function jdchat()
+    {
+        var script = document.createElement("script");  
+        script.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        script.src = "https://chat1.jd.com/api/checkChat?&callback=jQuerychat&pid="+src+"&returnCharset=utf-8&_=";  
+        document.body.appendChild(script);
+		}
+	function jQuerychat(data5) {
+		if (!data5.chatUrl){
+		document.getElementById("p5").innerHTML = ('<a href="https://chat.jd.com/jdchat/custom.action" target="_blank">京东自营客服</a>');
+		} else if (data5.chatUrl == 'chat.jd.com'){
+		document.getElementById("p5").innerHTML = ('<a href="https://chat.jd.com" target="_blank">京东自营客服</a>');
+		}
+		
+		else {
+		document.getElementById("p5").innerHTML = ('<a href="http:'+ data5.chatUrl+'" target="_blank">'+data5.seller+'</a>');
+		}
+    }
+	
+	function jdcom()
+    {
+        var script = document.createElement("script");  
+        script.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        script.src = "https://club.jd.com/clubservice.aspx?method=GetCommentsCount&referenceIds="+src+"&callback=jQuerycom&_=";  
+        document.body.appendChild(script);
+		}
+	function jQuerycom(data6) {
+		document.getElementById("p6").innerText = ("评价数：" + data6.CommentsCount[0].CommentCount + " 好评率%：" + data6.CommentsCount[0].GoodRateShow);
+    }
+	
+	function jdpro(){
+        document.getElementById("p7").innerHTML = ""
+		var script = document.createElement("script");  
+        script.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        script.src = "https://pi.3.cn/promoinfo/get?id="+src+"&area=22_1930_4284_0&origin=1&callback=Promotionsset";  
+        document.body.appendChild(script);
+		}
+	function Promotionsset(data7){
+		prodata=data7;
+		dp7 = document.getElementById("p7");
+		if (prodata.skuExtInfo) {
+			dp7.innerHTML += prodata.skuExtInfo +" "
+		}
+		i = 0;
+		i2 = 0;
+		i3 = 0;
+		Propre1();
+		}
+	function Propre1(){
+		if (prodata.promotionInfoList[i] == undefined || prodata.promotionInfoList[i] == null){
+		//alert("活动数：" + i);
+		m1=i;
+		arr1=new Array();
+		Propre2();
+		}
+		else {
+		i++;
+		Propre1();
+		}
+		}
+	function Propre2(){
+		if (prodata.promotionInfoList[i3].fullLadderDiscountList == null){
+		arr1[i3]=0;
+		 if (i3 == m1-1){
+		 //alert(1)
+		 Propre3();
+		 }
+		 else {
+		 i3++;
+		 i2=0;
+		 //alert(2)
+		 Propre2();
+		 }
+		}
+		
+		else if (prodata.promotionInfoList[i3].fullLadderDiscountList[i2] == undefined || prodata.promotionInfoList[i3].fullLadderDiscountList[i2] == null){
+		arr1[i3]=i2; //记录i2个数
+		 if (i3 == m1-1){
+		 //alert(arr1); //完成
+		 Propre3();
+		 }
+		 else {
+		 i3++;
+		 i2=0;
+		 Propre2();
+		 }
+		}
+		else {
+		i2++;
+		Propre2();
+		}
+		}
+	function Propre3(){
+		for (i4=0; i4<m1; i4++){
+		prodata3 = prodata.promotionInfoList[i4];
+		dp7.innerHTML += ((i4+1) + "、" + "活动时间：" +(new Date(prodata3.promoBeginTime)).toLocaleString()+ " 至 " +(new Date(prodata3.promoEndTime)).toLocaleString() )
+		dp7.innerHTML += (!prodata3.adwordUrl)?"<br/>":(" <a href='"+prodata3.adwordUrl+"' target='_blank'>活动链接</a><br/>")
+		if (prodata3.fullLadderDiscountList == null){
+		dp7.innerHTML += (prodata3.maxNum==0)?"<br/>":("限购" + prodata3.maxNum + "件<br/>");
+		}
+		for (i5=0; i5<arr1[i4]; i5++){
+		prodata1 = prodata.promotionInfoList[i4].fullLadderDiscountList[i5];
+		dp7.innerHTML += ("满" + prodata1.needMoney + "元，加" +prodata1.addMoney+ "元换购，减" +prodata1.rewardMoney+ "元，满" +prodata1.needNum+ "件，至少" + prodata1.minPoolNum + "件，减" +prodata1.deliverNum+ "件价格，折扣" +prodata1.rebate+ "，减" +prodata3.percent*100+ "%<br/>");
+		}
+		}
+		}
+		
+//2
+function jdpro2(){
+    p11.innerHTML = ""
+	var script = document.createElement("script");  
+    script.src = "https://cd.jd.com/promotion/v2?callback=jQueryQuan&skuId="+num1.value+"&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=";
+	script.charset = "gbk";
+    document.body.appendChild(script);
+	}
+function jQueryQuan(data11){
+	p11.innerHTML = "<br/>新版：<br/>"
+	document.getElementById("p3").innerHTML=(data11.ads[0].ad);
+	for (i=0; i<data11.skuCoupon.length; i++){
+		var data11a = data11.skuCoupon[i];
+		p11.innerHTML += !data11a.url?"":(" <a href='"+data11a.url.replace(/(couponSendFront\/send)/g, "couponActiveFront\/front")+"' target='_blank'>领券</a> ") +"满" + data11a.quota + "减" + data11a.discount + (" <a href='https://"+data11a.toUrl+"' target='_blank'>活动链接</a> ") +data11a.timeDesc +" "+ data11a.name +"<br/>";
+	}
+	
+	for (i2=0; i2<data11.prom.pickOneTag.length; i2++){
+		var data11b = data11.prom.pickOneTag[i2];
+		p11.innerHTML += i2+1 +"、"+ data11b.content + (" <a href='https://"+data11b.adurl+"' target='_blank'>活动链接</a> ") + "<br/>"
+	}
+	
+	for (i3=0; i3<data11.prom.tags.length; i3++){
+		var data11c = data11.prom.tags[i3];
+		p11.innerHTML += i3+1 +"、"+ data11c.name +" "+ data11c.content +"<br/>";
+		if (data11c.gifts){
+			for (i4=0; i4<data11c.gifts.length; i4++){
+				var data11d = data11c.gifts[i4];
+				p11.innerHTML += (" <a href='https://item.jd.com/"+data11d.sid+".html' target='_blank'>"+data11d.nm+"</a> 数量：")+ data11d.num + "<br/>"
+			}
+		}
+	}
+}
+
+
+	
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+function jdprom() {
+p8.innerHTML=""
+	if (xhr) {
+	xhr.open('get', "https://item.m.jd.com/ware/view.action?wareId="+num1.value, true);
+	xhr.onreadystatechange = function () {
+	if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+		promdata = xhr.responseText;
+		p8.innerHTML+= "<img src='" + $(promdata).find(".slide .J_ping")[1].src.replace(/(file)/g, "http").replace(/(n12)/g, "n5") + "'/>" + $(promdata).find(".yang-pic-price").text() +"元 "+ $(promdata).find(".title-text").text() + "</br>";
+		$(promdata).find(".item-import").each(function(){p8.innerHTML+= ($(this).find(".promotion-icon").text() + " <a href='"+$(this).find("a").attr("href")+"' target='_blank'>"+$(this).find(".promotion-item-text").text()+"</a> </br>") });
+		}
+	//else {jdprom1();}
+	}
+	}
+	}
+xhr.send();
+}
+
+	
+	function jddesc(){
+        var script = document.createElement("script");  
+        script.type = "text/javascript";  
+        var src = document.getElementById("num1").value;  
+        script.src = "https://d.3.cn/desc/"+src+"?callback=showdesc";  
+        document.body.appendChild(script);
+		}
+	function showdesc(data9){
+		document.getElementById("p9").innerHTML = (data9.content.replace(/(data-lazyload)/g, "src").replace(/\/\//g, 'https://'));
+    }
+	//满3件0.8 fullRefundType 15。满减 2。m满减 6
+</script>
+
+</head>
+<body >
+<div style="width:730px;margin:0px auto;">
+<p align="center"><b>【京东商品详细信息查询】</b></p>
+
+京东ID：<input type="text" value="" style="width:88px" id="num1" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="所有价格" onclick="jdpcprice();pricewx();priceqq();jdmprice();"/>
+<input type="button" value="显示所有项目" onclick="jdpcprice();pricewx();priceqq();jdmprice();jdstock();jdchat();jdcom();jdpro();jdpro2();jdprom();jddesc();"/>
+<br/>
+<p>
+<input type="button" value="PC价格：" onclick="jdpcprice();"/>
+<font id="p1"></font>
+</p>
+<p>
+<input type="button" value="微信价格：" onclick="pricewx();"/>
+<font id="p2"></font>
+</p>
+<p>
+<input type="button" value="QQ价格：" onclick="priceqq();"/>
+<font id="p12"></font>
+</p>
+<p>
+<input type="button" value="手机价格：" onclick="jdmprice();"/>
+<font id="p10"></font>
+</p>
+<p>
+<input type="button" value="下标题：" onclick="jdpro2();"/>
+<font id="p3"></font>
+</p>
+<p>
+<input type="button" value="店铺：" onclick="jdstock();"/>
+<font id="p4"></font>
+</p>
+<p>
+<input type="button" value="联系商家：" onclick="jdchat();"/>
+<font id="p5"></font>
+</p>
+<p>
+<input type="button" value="评分：" onclick="jdcom();"/>
+<font id="p6"></font>
+</p>
+<p>
+<input type="button" value="促销活动：" onclick="jdpro();jdpro2();"/>
+<div id="p7"></div>
+<div id="p11"></div>
+</p>
+<p>
+<input type="button" value="手机端促销活动：" onclick="jdprom();"/>
+<div id="p8"></div>
+</p>
+<p>
+<input type="button" value="描述：" onclick="jddesc();"/>
+<div id="p9"></div>
+</p>
+
+<script type="text/javascript">
+    function tra()
+    {
+	if(window.location.href.indexOf("?")>0){
+	 pre1=window.location.search.substr(1).replace(/(&)/g, '","').replace(/(=)/g, '":"');
+	 pre2=eval("(" + '{"'+pre1+'"}' + ")");
+	 pre3=pre2.prejdid;
+	  if (pre3 > 0){
+	  document.getElementById("num1").value = pre3;
+	  jdpro();
+	  jdpro2();
+	  //jdprom();
+	  }
+	  if (pre2.allp > 0){
+		document.getElementById("num1").value = pre2.allp;
+		jdpcprice();pricewx();priceqq();jdmprice();
+	  }
+     }
+	}
+	tra();
+</script>
+
+
+<p>说明：手机端促销活动需使用<a href="crossdo.html">[跨域方法]</a></p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="https://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>

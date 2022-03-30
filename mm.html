@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="author" content="http://cll.name" />
+<title></title>
+
+<script type="text/javascript">
+function get1() {
+    document.getElementById("nowtime1").innerHTML = "获取中...";
+	var script = document.createElement("script");
+    script.src = "https://cll.name/mm.php?url=" + encodeURIComponent(document.getElementById("text1").value) + "&callback=get1Callback&_=" + new Date().getTime();
+    script.charset = "gbk";
+    document.body.appendChild(script);
+    script.onerror = function () {
+        get1();
+    };
+}
+function get1Callback(data1) {
+    document.getElementById("nowtime1").innerHTML = data1.ResMsg + " 分享时间：" + data1.Yun_share_date + "<br/>" + "名称：" + data1.Yun_title + "<br/>大小：" + data1.Yun_size + "<br/>" + data1.Yun_url + "#" + data1.Yun_url_pass + '<a href="' + data1.Yun_url + "#" + data1.Yun_url_pass + '" target="_blank">打开链接</a>';
+}
+
+</script>
+
+</head>
+<body>
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b></b></p>
+
+<br/>
+<br/>
+url：<input id="text1" type="text" value="https://pan.baidu.com/s/13HRqqigF_o3O6SE1X3Y-HQ" style="width:360px">
+<input type="button" value="获取" onclick="get1();" />
+<br/>
+<br/>
+
+<b id="nowtime1"></b>
+
+<br/>
+<br/>
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>
+
+
+

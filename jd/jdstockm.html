@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东,批量,查询库存,提取,有货"/>
+<meta name="description" content="京东批量提取有货商品 查询库存"/>
+<meta name="author" content="http://cll.name" />
+<title>京东批量提取有货商品 查询库存</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+
+function getCookie(c_name)
+{
+if (document.cookie.length>0)
+{ 
+c_start=document.cookie.indexOf(c_name + "=")
+if (c_start!=-1)
+{ 
+c_start=c_start + c_name.length+1 
+c_end=document.cookie.indexOf(";",c_start)
+if (c_end==-1) c_end=document.cookie.length
+return unescape(document.cookie.substring(c_start,c_end))
+} 
+}
+return ""
+}
+
+function setCookie(c_name,value,expiredays)
+{
+var exdate=new Date()
+exdate.setDate(exdate.getDate()+expiredays)
+document.cookie=c_name+ "=" +escape(value)+
+((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
+}
+
+function checkCookie()
+{
+myloc=getCookie('myloc')
+if (myloc!=null && myloc!="")
+  {document.getElementById(myloc).checked=true;}
+}
+
+function set_e()
+{
+setCookie('myloc',"_e",365)
+}
+function set_s()
+{
+setCookie('myloc',"_s",365)
+}
+function set_n()
+{
+setCookie('myloc',"_n",365)
+}
+function set_c()
+{
+setCookie('myloc',"_c",365)
+}
+function set_ne()
+{
+setCookie('myloc',"_ne",365)
+}
+function set_sw()
+{
+setCookie('myloc',"_sw",365)
+}
+function set_nw()
+{
+setCookie('myloc',"_nw",365)
+}
+function set_m()
+{
+setCookie('myloc',"_m",365)
+}
+
+var pro1, city1, area1;
+
+function line1() {
+if (document.getElementById("_e").checked)
+{
+pro1 = "15";
+city1 = "1213";
+area1 = "1214";
+}
+else if (document.getElementById("_s").checked)
+{
+pro1 = "19";
+city1 = "1601";
+area1 = "3633";
+}
+else if (document.getElementById("_n").checked)
+{
+pro1 = "1";
+city1 = "2800";
+area1 = "2848";
+}
+else if (document.getElementById("_c").checked)
+{
+pro1 = "17";
+city1 = "1381";
+area1 = "1386";
+}
+else if (document.getElementById("_ne").checked)
+{
+pro1 = "8";
+city1 = "560";
+area1 = "50825";
+}
+else if (document.getElementById("_sw").checked)
+{
+pro1 = "22";
+city1 = "1930";
+area1 = "50947";
+}
+else if (document.getElementById("_nw").checked)
+{
+pro1 = "27";
+city1 = "2376";
+area1 = "4343";
+}
+else if (document.getElementById("_m").checked)
+{
+pro1 = t1.value;
+city1 = t2.value;
+area1 = t3.value;
+}
+
+i = 0;
+ri = 1;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+
+function line2(){
+	if (i < arr.length){
+		if (arr[i]){
+			jdstock(i);
+			i++;
+			line2();
+		}
+		else {i++; line2();}
+	}
+}
+//http://wq.jd.com/item/view2?datatype=1&callback=getStockCallback"+numn+"&sku="+arr[i]+"&areaid="+pro1+"_"+city1+"_"+area1+"_0&u_source=weixin&_=" + new Date().getTime();
+//"http://c0.3.cn/stock?skuId="+arr[i]+"&area="+pro1+"_"+city1+"_"+area1+"_0&venderId=0&cat=0,0,0&buyNum=1&choseSuitSkuIds=&extraParam={%22originid%22:%221%22}&ch=1&fqsp=0&pduid=&pdpin=&callback=getStockCallback"+numn+"&_=" + new Date().getTime();
+function jdstock(numn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://wq.jd.com/item/view2?datatype=1&callback=getStockCallback"+numn+"&sku="+arr[i]+"&areaid="+pro1+"_"+city1+"_"+area1+"_0&u_source=weixin&_=" + new Date().getTime();
+	jsonp.charset = "gbk";
+	jsonp.onerror = function(){jdstock(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function getStockCallback'+numn+'(data1){document.getElementById("prog1").innerText = ("["+('+i+'+1) + "/" + (arr.length)+"] "+'+arr[i]+');if(data1.stock.StockStateName != "无货"){document.getElementById("ta2").value += '+arr[i]+'+"\\r\\n"; prog3.innerText = ri; ri++;}}';
+	document.body.appendChild(myScript);
+}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【京东批量提取有货商品】</b></p>
+<br />
+<form>
+<input type="radio" checked="checked" name="Loc" id="_e" onclick="set_e()" />华东 
+<input type="radio" name="Loc" id="_s" onclick="set_s()" />华南 
+<input type="radio" name="Loc" id="_n" onclick="set_n()" />华北 
+<input type="radio" name="Loc" id="_c" onclick="set_c()" />华中 
+<input type="radio" name="Loc" id="_ne" onclick="set_ne()" />东北 
+<input type="radio" name="Loc" id="_sw" onclick="set_sw()" />西南 
+<input type="radio" name="Loc" id="_nw" onclick="set_nw()" />西北
+<input type="radio" name="Loc" id="_m" onclick="set_m()" />自定义:
+省<input type="text" value="22" id="t1" style="width:18px" />
+市<input type="text" value="1930" id="t2" style="width:30px" />
+区<input type="text" value="50947" id="t3" style="width:35px" />
+<input type="button" value="开始" onclick="line1();"/>
+</form>
+
+<br />
+商品ID：<textarea id="ta1" cols="12" rows="18" style="">1977977</textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+有货：<textarea id="ta2" cols="12" rows="18" style="" readonly="readonly"></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta2').value=''"/>
+<br />
+<br />
+进度：<b id="prog1">[0/0] 888888</b> 结果数：<b id="prog3">0</b>
+<br />
+<br />
+<p>说明：在左方文本框每行输入1个商品ID，选好地区，点开始。
+</p>
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+<div id="a1"></div>
+</body>
+</html>

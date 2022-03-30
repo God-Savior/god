@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东,商品列表,找券,活动,叠加优惠"/>
+<meta name="description" content="京东商品列表页找券&活动"/>
+<meta name="author" content="http://cll.name" />
+<title>京东商品列表页找券&活动</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function getid1() {
+  p = 0;
+  getid();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function getid() {
+if ((eval(link2.value)+p) <= link3.value){
+    if (xhr) {
+	    xhr.open('get', link1.value + (eval(link2.value) + p), true);
+        xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				prog6.innerText = p+1;
+				page1 = xhr.responseText;
+				page2 = page1.substr(page1.indexOf("pay_after") + 13);  
+				page3 = page2.substr(0,page2.indexOf("]"));
+				page4 = page3.split(",");
+				for (var i=0; i<page4.length; i++) {
+					document.getElementById("ta1").value += (page4[i] + "\r\n");
+				};
+				//document.getElementById("a1").innerHTML=page3
+				p++;
+				getid();
+				
+			}}
+		}
+		xhr.timeout = 6000;
+		xhr.ontimeout = function(){getid();};
+		xhr.send();
+    }
+}
+else if ((eval(link2.value)+p) > link3.value){
+line1();
+};	
+}
+
+
+function line1() {
+i = 0;
+ri = 1;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+function line2(){
+	if (i < arr.length){
+		if (arr[i]){
+			jdquan(i,arr[i]);
+			i++;
+			line2();
+		}else {i++; line2();}
+	}else {console.log("fin");}
+}
+
+/*
+function jdquan(){
+	var js = document.createElement("script");
+    js.src = "http://cd.jd.com/promotion/v2?callback=jQueryQuan&skuId="+arr[i]+"&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=";
+	js.charset = "gbk";
+    document.body.appendChild(js);
+	js.onerror = function(){jdquan();};
+}
+function jQueryQuan(quandata){
+	document.getElementById("prog1").innerText = ("["+(i+1) + "/" + (arr.length)+"] "+arr[i]);
+	if (JSON.stringify(quandata).indexOf(text1.value) >= 0 && JSON.stringify(quandata).indexOf(text2.value) >= 0 ) {
+		document.getElementById("ta2").value += arr[i]+"\r\n";
+		prog3.innerText = ri;
+		ri++;
+		i++;
+		line2();
+	}
+	else {
+		i++;
+		line2();
+	}
+}*/
+
+function jdquan(numn,arrn){
+    //console.log(numn);
+	var jsonp = document.createElement("script");
+    jsonp.src = "http://cd.jd.com/promotion/v2?callback=jQueryQuan"+numn+"&skuId="+arrn+"&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=";
+	jsonp.charset = "gbk";
+	jsonp.onerror = function(){jdquan(numn,arrn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQueryQuan'+numn+'(quandata){document.getElementById("prog1").innerText = ("["+('+i+'+1) + "/" + (arr.length)+"] "+'+arrn+');if (JSON.stringify(quandata).indexOf(text1.value) >= 0 && JSON.stringify(quandata).indexOf(text2.value) >= 0){document.getElementById("ta2").value += '+arrn+'+"\\r\\n"; prog3.innerText = ri; ri++;}}';
+	document.body.appendChild(myScript);
+}
+
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【京东商品列表页找券&活动】</b></p>
+<br />
+<a href="http://www.jd.com/allSort.aspx">[全部商品分类]</a>
+<br />
+链接：<input type="text" value="http://list.jd.com/list.html?cat=9847,9851,9881&delivery=1&stock=1&sort=sort_dredisprice_asc&go=0&JL=4_7_0&page=" id="link1" style="width:500px" />
+页数<input type="text" value="1" id="link2" style="width:20px" />-<input type="text" value="1" id="link3" style="width:20px" />
+<input type="button" value="I.开始" onclick="getid1();"/>
+<b id="prog6"></b>
+<br />
+<br />
+页面所有商品ID：<textarea id="ta1" cols="12" rows="18" style=""></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+过滤结果：<textarea id="ta2" cols="12" rows="18" style="" readonly="readonly"></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta2').value=''"/>
+<br />
+<br />
+<input type="button" value="II.开始" onclick="line1();"/>
+
+保留促销活动、券信息中同时包含字符:<input type="text" value="有效期" id="text1" style="width:100px" />与<input type="text" value="满减" id="text2" style="width:100px" />
+<br />
+进度：<b id="prog1">[0/0] 888888</b> 结果数：<b id="prog3">0</b>
+<br />
+<br />
+<p>说明：用于查找京东商品列表页面，同时存在优惠券（商品页面促销信息旁出现可领优惠券是最近出现的功能，在未领取或未登陆的时候显示，有的商品可用券也不一定会显示。在能显示的时候才能用本工具搜索到进行过滤）与满减等活动商品。适合明白链接参数、有Javascript基础者使用。更改链接中的部分代码，输入获取的促销信息json代码（<a href="http://cd.jd.com/promotion/v2?callback=jQueryQuan&skuId=1032307&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=">示例</a>）中包含的相关活动特征字符后开始。
+"I.开始"需使用<a href="crossdo.html">[跨域方法]</a>，自动获取页面所有商品ID到列表，自动进行下一步。"II.开始"可手动输入ID到左方列表后开始第二步。
+</p>
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/" target="_blank">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+<div id="a1"></div>
+</body>
+</html>

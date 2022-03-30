@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东,批量,加入购物车"/>
+<meta name="description" content="京东,批量,加入购物车"/>
+<meta name="author" content="http://cll.name" />
+<meta name="referrer" content="never" />
+<title>京东批量加入购物车</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+
+function line1() {
+i = 0;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+function line2(){
+	if (i < arr.length){
+		if (arr[i] != ""){
+			addjd();
+		}
+		else {i++; line2();}
+	}
+	else {alert("完成");}
+}
+
+function addjd()  
+{  
+    var script = document.createElement("script");
+    script.src = "https://cart.jd.com/gate.action?callback=jQuery5&pid="+arr[i]+"&f=3&ptype=1&pcount=1&_=" + new Date().getTime();
+    document.body.appendChild(script);
+	script.onerror = function(){addjd();};
+}  
+function jQuery5(data1) {
+	document.getElementById("prog1").innerText = ("["+(i+1) + "/" + (arr.length)+"] "+arr[i]);
+	document.getElementById("pn").innerText = data1.num;
+	if (data1.flag="true"){
+	i++;
+	line2();
+	} else {
+	alert("Whats the matter");
+	}
+}
+
+/*
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function pn1() {
+    if (xhr) {
+	    xhr.open('get', 'http://cart.jd.com/tcart', true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			page1 = xhr.responseText;
+			alert(page1)
+			//document.getElementById("pn").innerHTML=page1
+		}}
+    }
+    xhr.send();
+    }	
+}
+*/
+
+
+//http://cart.jd.com/cart/miniCartServiceNew.action?callback=jQuery&method=GetCart&_=
+
+//http://cart.jd.com/gate.action?callback=jQuery&pid=1242444&f=3&ptype=1&pcount=1&_=
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【京东批量加入购物车】</b></p>
+<br />
+<a href="http://cart.jd.com/cart">[京东购物车]</a>
+<br />
+商品ID：<textarea id="ta1" cols="12" rows="18" style=""></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+<input type="button" value="开始" onclick="line1();"/>
+<br />
+
+<br />
+进度：<b id="prog1">[0/0] 888888</b>
+购物车商品数量：<b id="pn">0</b>
+<br />
+<p>简介：每行输入一个京东商品ID，购物车目前允许添加70种商品。
+</p>
+
+<br />
+
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+<div id="a1"></div>
+</body>
+</html>

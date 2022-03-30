@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东库存查询,哪有货,苏宁,易讯,当当,国美,一号店"/>
+<meta name="description" content="京东库存查询,哪有货,苏宁,易讯,当当,国美,一号店"/>
+<meta name="author" content="http://cll.name/jd" />
+<title>京东、苏宁、易讯、当当、国美、一号店有货地区|库存查询</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var datajd = [
+  {pro1:"2", city1:"78", area1:"51978", sn:"华东|上海:"},
+  {pro1:"12", city1:"904", area1:"905", sn:"华东|江苏:"},
+  {pro1:"15", city1:"1213", area1:"1214", sn:"华东|浙江:"},
+  {pro1:"14", city1:"1116", area1:"1119", sn:"华东|安徽:"},
+  {pro1:"19", city1:"1601", area1:"3633", sn:"华南|广东:"},
+  {pro1:"20", city1:"1715", area1:"1716", sn:"华南|广西:"},
+  {pro1:"16", city1:"1303", area1:"1305", sn:"华南|福建:"},
+  {pro1:"23", city1:"2121", area1:"22466", sn:"华南|海南:"},
+  {pro1:"1", city1:"72", area1:"2799", sn:"华北|北京:"},
+  {pro1:"5", city1:"142", area1:"143", sn:"华北|河北:"},
+  {pro1:"11", city1:"799", area1:"801", sn:"华北|内蒙古:"},
+  {pro1:"13", city1:"1000", area1:"1002", sn:"华北|山东:"},
+  {pro1:"6", city1:"303", area1:"304", sn:"华北|山西:"},
+  {pro1:"3", city1:"51035", area1:"39620", sn:"华北|天津:"},
+  {pro1:"17", city1:"1381", area1:"1386", sn:"华中|湖北:"},
+  {pro1:"18", city1:"1482", area1:"1485", sn:"华中|湖南:"},
+  {pro1:"7", city1:"412", area1:"415", sn:"华中|河南:"},
+  {pro1:"21", city1:"1827", area1:"1828", sn:"华中|江西:"},
+  {pro1:"8", city1:"560", area1:"567", sn:"东北|辽宁:"},
+  {pro1:"10", city1:"698", area1:"699", sn:"东北|黑龙江:"},
+  {pro1:"9", city1:"639", area1:"640", sn:"东北|吉林:"},
+  {pro1:"22", city1:"1930", area1:"4282", sn:"西南|四川:"},
+  {pro1:"4", city1:"113", area1:"9775", sn:"西南|重庆:"},
+  {pro1:"25", city1:"2235", area1:"2236", sn:"西南|云南:"},
+  {pro1:"24", city1:"2144", area1:"2145", sn:"西南|贵州:"},
+  {pro1:"26", city1:"2951", area1:"2952", sn:"西南|西藏:"},
+  {pro1:"27", city1:"2376", area1:"2380", sn:"西北|陕西:"},
+  {pro1:"30", city1:"2628", area1:"2629", sn:"西北|宁夏:"},
+  {pro1:"28", city1:"2487", area1:"2488", sn:"西北|甘肃:"},
+  {pro1:"29", city1:"2580", area1:"2581", sn:"西北|青海:"},
+  {pro1:"31", city1:"2652", area1:"2653", sn:"西北|新疆:"},
+  {pro1:"42", city1:"2754", area1:"2755", sn:"香港:"},
+  {pro1:"43", city1:"2770", area1:"2771", sn:"澳门:"},
+  {pro1:"32", city1:"2768", area1:"2769", sn:"台湾:"},
+  {pro1:"84", city1:"1310", area1:"0", sn:"钓鱼岛:"},
+]; 
+
+var datayx = [
+  {pro1:"2621", city1:"2622", sn:"华东|上海:"},
+  {pro1:"1591", city1:"1592", sn:"华东|江苏:"},
+  {pro1:"3225", city1:"3226", sn:"华东|浙江:"},
+  {pro1:"1", city1:"2", sn:"华东|安徽:"},
+  {pro1:"403", city1:"404", sn:"华南|广东:"},
+  {pro1:"556", city1:"600", sn:"华南|广西:"},
+  {pro1:"201", city1:"202", sn:"华南|福建:"},
+  {pro1:"789", city1:"790", sn:"华南|海南:"},
+  {pro1:"131", city1:"132", sn:"华北|北京:"},
+  {pro1:"814", city1:"815", sn:"华北|河北:"},
+  {pro1:"2016", city1:"2017", sn:"华北|内蒙古:"},
+  {pro1:"2329", city1:"2330", sn:"华北|山东:"},
+  {pro1:"2490", city1:"2491", sn:"华北|山西:"},
+  {pro1:"2858", city1:"2859", sn:"华北|天津:"},
+  {pro1:"1323", city1:"1324", sn:"华中|湖北:"},
+  {pro1:"1454", city1:"1455", sn:"华中|湖南:"},
+  {pro1:"1144", city1:"1145", sn:"华中|河南:"},
+  {pro1:"1718", city1:"1719", sn:"华中|江西:"},
+  {pro1:"1900", city1:"1901", sn:"东北|辽宁:"},
+  {pro1:"999", city1:"1000", sn:"东北|黑龙江:"},
+  {pro1:"1830", city1:"1831", sn:"东北|吉林:"},
+  {pro1:"2652", city1:"2653", sn:"西南|四川:"},
+  {pro1:"158", city1:"159", sn:"西南|重庆:"},
+  {pro1:"3077", city1:"3078", sn:"西南|云南:"},
+  {pro1:"693", city1:"694", sn:"西南|贵州:"},
+  {pro1:"2996", city1:"2997", sn:"西南|西藏:"},
+  {pro1:"2212", city1:"2213", sn:"西北|陕西:"},
+  {pro1:"2130", city1:"2131", sn:"西北|宁夏:"},
+  {pro1:"299", city1:"300", sn:"西北|甘肃:"},
+  {pro1:"2160", city1:"2161", sn:"西北|青海:"},
+  {pro1:"2878", city1:"2879", sn:"西北|新疆:"},
+]; 
+
+var datasn = [
+  {pro1:"9264", sn:"华东|上海:"},
+  {pro1:"9173", sn:"华东|江苏:"},
+  {pro1:"9315", sn:"华东|浙江:"},
+  {pro1:"9001", sn:"华东|安徽:"},
+  {pro1:"9041", sn:"华南|广东:"},
+  {pro1:"9063", sn:"华南|广西:"},
+  {pro1:"9018", sn:"华南|福建:"},
+  {pro1:"9085", sn:"华南|海南:"},
+  {pro1:"9017", sn:"华北|北京:"},
+  {pro1:"9095", sn:"华北|河北:"},
+  {pro1:"9211", sn:"华北|内蒙古:"},
+  {pro1:"9227", sn:"华北|山东:"},
+  {pro1:"9245", sn:"华北|山西:"},
+  {pro1:"9281", sn:"华北|天津:"},
+  {pro1:"9135", sn:"华中|湖北:"},
+  {pro1:"9151", sn:"华中|湖南:"},
+  {pro1:"9106", sn:"华中|河南:"},
+  {pro1:"9188", sn:"华中|江西:"},
+  {pro1:"9197", sn:"东北|辽宁:"},
+  {pro1:"9122", sn:"东北|黑龙江:"},
+  {pro1:"9164", sn:"东北|吉林:"},
+  {pro1:"9265", sn:"西南|四川:"},
+  {pro1:"9325", sn:"西南|重庆:"},
+  {pro1:"9301", sn:"西南|云南:"},
+  {pro1:"9076", sn:"西南|贵州:"},
+  {pro1:"8999", sn:"西南|西藏:"},
+  {pro1:"9254", sn:"西北|陕西:"},
+  {pro1:"9326", sn:"西北|宁夏:"},
+  {pro1:"9028", sn:"西北|甘肃:"},
+  {pro1:"9219", sn:"西北|青海:"},
+  {pro1:"9289", sn:"西北|新疆:"},
+]; 
+
+var datadd = [
+  {pro1:"131", city1:"3", area1:"1310101", sn:"华东|上海:"},
+  {pro1:"132", city1:"1601", area1:"1320114", sn:"华东|江苏:"},
+  {pro1:"133", city1:"1901", area1:"1330109", sn:"华东|浙江:"},
+  {pro1:"134", city1:"1501", area1:"1340101", sn:"华东|安徽:"},
+  {pro1:"144", city1:"5", area1:"1440108", sn:"华南|广东:"},
+  {pro1:"145", city1:"2201", area1:"1450101", sn:"华南|广西:"},
+  {pro1:"135", city1:"2101", area1:"1350101", sn:"华南|福建:"},
+  {pro1:"146", city1:"2301", area1:"1460101", sn:"华南|海南:"},
+  {pro1:"111", city1:"1", area1:"1110101", sn:"华北|北京:"},
+  {pro1:"113", city1:"601", area1:"1130118", sn:"华北|河北:"},
+  {pro1:"115", city1:"1001", area1:"1150110", sn:"华北|内蒙古:"},
+  {pro1:"137", city1:"1101", area1:"1370111", sn:"华北|山东:"},
+  {pro1:"114", city1:"1201", area1:"1140101", sn:"华北|山西:"},
+  {pro1:"112", city1:"14", area1:"1120101", sn:"华北|天津:"},
+  {pro1:"142", city1:"16", area1:"1420101", sn:"华中|湖北:"},
+  {pro1:"143", city1:"1801", area1:"1430101", sn:"华中|湖南:"},
+  {pro1:"141", city1:"1401", area1:"1410115", sn:"华中|河南:"},
+  {pro1:"136", city1:"2001", area1:"1360101", sn:"华中|江西:"},
+  {pro1:"121", city1:"12", area1:"1210102", sn:"东北|辽宁:"},
+  {pro1:"123", city1:"701", area1:"1230119", sn:"东北|黑龙江:"},
+  {pro1:"122", city1:"801", area1:"1220111", sn:"东北|吉林:"},
+  {pro1:"151", city1:"3001", area1:"1510120", sn:"西南|四川:"},
+  {pro1:"150", city1:"401", area1:"1500141", sn:"西南|重庆:"},
+  {pro1:"153", city1:"2401", area1:"1530101", sn:"西南|云南:"},
+  {pro1:"152", city1:"2501", area1:"1520111", sn:"西南|贵州:"},
+  {pro1:"154", city1:"2901", area1:"1540101", sn:"西南|西藏:"},
+  {pro1:"161", city1:"20", area1:"1610114", sn:"西北|陕西:"},
+  {pro1:"164", city1:"2801", area1:"1640101", sn:"西北|宁夏:"},
+  {pro1:"162", city1:"2701", area1:"1620101", sn:"西北|甘肃:"},
+  {pro1:"163", city1:"3101", area1:"1630101", sn:"西北|青海:"},
+  {pro1:"165", city1:"2601", area1:"1650101", sn:"西北|新疆:"},
+  {pro1:"171", city1:"3501", area1:"", sn:"台湾:"},
+  {pro1:"172", city1:"10", area1:"", sn:"香港:"},
+  {pro1:"173", city1:"3401", area1:"", sn:"澳门:"},
+  {pro1:"0", city1:"800000", area1:"", sn:"钓鱼岛:"},
+]; 
+
+var datagm = [
+  {pro1:"21010100", sn:"华东|上海:"},
+  {pro1:"23010100", sn:"华东|江苏:"},
+  {pro1:"22010100", sn:"华东|浙江:"},
+  {pro1:"24010100", sn:"华东|安徽:"},
+  {pro1:"31010100", sn:"华南|广东:"},
+  {pro1:"32010100", sn:"华南|广西:"},
+  {pro1:"25010100", sn:"华南|福建:"},
+  {pro1:"33010100", sn:"华南|海南:"},
+  {pro1:"11011400", sn:"华北|北京:"},
+  {pro1:"13080100", sn:"华北|河北:"},
+  {pro1:"15060100", sn:"华北|内蒙古:"},
+  {pro1:"26050100", sn:"华北|山东:"},
+  {pro1:"14080100", sn:"华北|山西:"},
+  {pro1:"12010100", sn:"华北|天津:"},
+  {pro1:"41010100", sn:"华中|湖北:"},
+  {pro1:"42010100", sn:"华中|湖南:"},
+  {pro1:"43010100", sn:"华中|河南:"},
+  {pro1:"44010100", sn:"华中|江西:"},
+  {pro1:"53010100", sn:"东北|辽宁:"},
+  {pro1:"51010100", sn:"东北|黑龙江:"},
+  {pro1:"52010100", sn:"东北|吉林:"},
+  {pro1:"71010100", sn:"西南|四川:"},
+  {pro1:"74010100", sn:"西南|重庆:"},
+  {pro1:"72010200", sn:"西南|云南:"},
+  {pro1:"73010100", sn:"西南|贵州:"},
+  {pro1:"75010100", sn:"西南|西藏:"},
+  {pro1:"64010100", sn:"西北|陕西:"},
+  {pro1:"61050100", sn:"西北|宁夏:"},
+  {pro1:"65010100", sn:"西北|甘肃:"},
+  {pro1:"63010100", sn:"西北|青海:"},
+  {pro1:"62010100", sn:"西北|新疆:"},
+  {pro1:"81010100", sn:"台湾:"},
+  {pro1:"82010100", sn:"香港:"},
+  {pro1:"83010100", sn:"澳门:"},
+  {pro1:"84010100", sn:"钓鱼岛:"},
+];
+
+var datayhd = [
+  {pro1:"1", sn:"华东|上海:"},
+  {pro1:"5", sn:"华东|江苏:"},
+  {pro1:"6", sn:"华东|浙江:"},
+  {pro1:"13", sn:"华东|安徽:"},
+  {pro1:"20", sn:"华南|广东:"},
+  {pro1:"21", sn:"华南|广西:"},
+  {pro1:"14", sn:"华南|福建:"},
+  {pro1:"22", sn:"华南|海南:"},
+  {pro1:"2", sn:"华北|北京:"},
+  {pro1:"4", sn:"华北|河北:"},
+  {pro1:"8", sn:"华北|内蒙古:"},
+  {pro1:"16", sn:"华北|山东:"},
+  {pro1:"32", sn:"华北|山西:"},
+  {pro1:"3", sn:"华北|天津:"},
+  {pro1:"18", sn:"华中|湖北:"},
+  {pro1:"19", sn:"华中|湖南:"},
+  {pro1:"17", sn:"华中|河南:"},
+  {pro1:"15", sn:"华中|江西:"},
+  {pro1:"9", sn:"东北|辽宁:"},
+  {pro1:"11", sn:"东北|黑龙江:"},
+  {pro1:"10", sn:"东北|吉林:"},
+  {pro1:"12", sn:"西南|四川:"},
+  {pro1:"7", sn:"西南|重庆:"},
+  {pro1:"24", sn:"西南|云南:"},
+  {pro1:"23", sn:"西南|贵州:"},
+  {pro1:"25", sn:"西南|西藏:"},
+  {pro1:"26", sn:"西北|陕西:"},
+  {pro1:"30", sn:"西北|宁夏:"},
+  {pro1:"27", sn:"西北|甘肃:"},
+  {pro1:"28", sn:"西北|青海:"},
+  {pro1:"29", sn:"西北|新疆:"},
+]; 
+ 
+function price_jd() {
+	i = 0;
+	src = document.getElementById("num1").value;
+	pricejd();
+}
+
+function pricejd() {
+	if (i < datajd.length){
+		jdstock(i);
+		i++;
+		pricejd();
+	}
+}
+
+function jdstock(numn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://wq.jd.com/item/view2?datatype=1&callback=getStockCallback"+numn+"&sku="+src+"&areaid="+datajd[i].pro1+"_"+datajd[i].city1+"_"+datajd[i].area1+"_0&u_source=weixin&_=" + new Date().getTime();
+	jsonp.charset = "gbk";
+	jsonp.onerror = function(){jdstock(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function getStockCallback'+numn+'(getjd){if(getjd.stock.rn == -1 || getjd.stock.rn ==undefined){document.getElementById("ta1").value += (datajd['+i+'].sn+getjd.stock.StockStateName + " " + getjd.price.p + "元\\r\\n")}else{document.getElementById("ta1").value += (datajd['+i+'].sn + getjd.stock.StockStateName + "，剩余:" + getjd.stock.rn + "件 " + getjd.price.p + "元\\r\\n")}}';
+	document.body.appendChild(myScript);
+}
+		
+function clear1() {
+	document.getElementById("ta1").value = ("");
+	}
+
+	
+function price_yx() {
+  i = 0;     
+  priceyx();
+}
+
+function priceyx() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num2").value;  
+        script.src = "http://app.51buy.com/json.php?mod=aitem&act=getdetail&allattr=1&pid="+src+"&provinceid="+datayx[i].pro1+"&district="+datayx[i].city1+"&callback=yxcallback";  
+        document.body.appendChild(script);  
+}
+  
+function yxcallback(getyx) {
+  		if (getyx.data.sale_type == 1)
+		{
+	    document.getElementById("ta1").value += (datayx[i].sn + "有货" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datayx[i].sn + "无货" + "\r\n");
+		}
+  		i++;
+  		if(i < datayx.length) {priceyx();}
+  		}
+
+		
+function price_sn() {
+  i = 0;     
+  pricesn();
+}
+
+function pricesn() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num3").value;  
+        script.src = "http://www.suning.com/webapp/wcs/stores/ItemPrice/000000000"+src+"__"+datasn[i].pro1+"__2.html?callback=showSaleStatus";
+        script.onerror = function(){pricesn();};
+		document.body.appendChild(script);  
+}
+  
+function showSaleStatus(getsn) {
+  		if (getsn.saleInfo[0].invStatus == 1)
+		{
+	    document.getElementById("ta1").value += (datasn[i].sn + "有货 " + getsn.saleInfo[0].promotionPrice + "元" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datasn[i].sn + "无货 " + getsn.saleInfo[0].promotionPrice + "元" + "\r\n");
+		}
+  		i++;
+  		if(i < datasn.length) {pricesn();}
+  		}
+
+		
+function price_dd() {
+  i = 0;     
+  pricedd();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function pricedd() {
+      if (xhr) {
+        src = document.getElementById("num4").value;
+		xhr.open('get', "http://product.dangdang.com/pricestock/callback.php?type=stockv2&product_id="+src+"&gift_ids=&gift_counts=&fourarea=true&shop_id=0&province_id="+datadd[i].pro1+"&city_id="+datadd[i].city1+"&area_id="+datadd[i].area1+"&page_type=mall", true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  var data1 = eval("(" + xhr.responseText +")");  //JSON.parse(this.responseText)
+  		if (data1.stock_status == 0)
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "全球无货" + "\r\n");
+		}
+		else if (data1.havestock == "realstock")
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "有货" + "\r\n");
+		}
+		else if (data1.havestock == "presale")
+		{
+	    document.getElementById("ta1").value += (datadd[i].sn + "预售" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datadd[i].sn + "无货" + "\r\n");
+		}
+  		i++;
+  		if(i < datadd.length) {pricedd();}
+		  }
+    }
+        xhr.send();
+      }
+  		}
+		
+		
+function price_gm() {
+  i = 0;     
+  pricegm();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function pricegm() {
+      if (xhr) {
+        src = document.getElementById("num5").value;
+		xhr.open('get', "http://item.gome.com.cn/" + src + ".html", true);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+		  gm1 = xhr.responseText
+		  gm2=gm1.substr(gm1.indexOf("prdInfo") + 10);  
+		  gm3=gm2.substr(0,gm2.indexOf("}")+1);
+		  gm4 = eval("(" + gm3 + ")");
+		  //document.getElementById("source").value = gm4.price;
+		  pricegm1();
+		  }
+    }
+        xhr.send();
+      }
+  		}
+ 
+function pricegm1() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        script.src = "http://g.gome.com.cn/ec/homeus/browse/store.jsp?callback=jQuerygm&goodsNo=" + gm4.skuNo + "&city="+datagm[i].pro1+"&skuType_p=" + gm4.skuType + "&sid=" + gm4.sku + "&pid=" + gm4.prdId;
+        document.body.appendChild(script);  
+}
+  
+function jQuerygm(getgm) {
+  		if (getgm.result == "Y")
+		{
+	    document.getElementById("ta1").value += (datagm[i].sn + "有货 " + getgm.price + "元" + "\r\n");
+		}
+		else
+		{
+		document.getElementById("ta1").value += (datagm[i].sn + "无货 " + getgm.price + "元" + "\r\n");
+		}
+  		i++;
+  		if(i < datagm.length) {pricegm1();}
+  		}
+	
+
+function price_yhd() {
+  i = 0;     
+  priceyhd();
+}
+ 
+function priceyhd() {
+        script = document.createElement("script");  
+        script.type = "text/javascript";  
+        src = document.getElementById("num6").value;  
+        script.src = "http://gps.yhd.com/restful/detail?mcsite=1&provinceId="+datayhd[i].pro1+"&pmId="+src+"&callback=jsonpyhd";
+        document.body.appendChild(script);  
+}
+
+function jsonpyhd(getyhd) {
+	    document.getElementById("ta1").value += (datayhd[i].sn + "库存:" + getyhd.currentStockNum + " " + getyhd.currentPrice + "元" + "\r\n");
+  		i++;
+  		if(i < datayhd.length) {priceyhd();}
+  		}
+		
+</script>
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="#80ff80" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:#80ff80">
+<p align="center"><b>【京东、易讯、苏宁、当当、国美、一号店有货地区|库存查询】</b></p>
+<br />
+<p>
+输入<a href="stockjd.htm" target="_blank">京东</a>ID:
+<input type="text" value="" id="num1" style="width:100px" onkeyup="self['num1'].value=self['num1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_jd()"/>
+<a href="stockyx.htm" target="_blank">易讯</a>ID:
+<input type="text" value="" id="num2" style="width:100px" onkeyup="self['num2'].value=self['num2'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_yx()"/>
+<a href="stocksn.htm" target="_blank">苏宁</a>ID:
+<input type="text" value="" id="num3" style="width:100px" onkeyup="self['num3'].value=self['num3'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_sn()"/>
+
+<script type="text/javascript">
+    function tra()
+    {
+	if(window.location.href.indexOf("?")>0){
+	 pre1=window.location.search.substr(1).replace(/(&)/g, '","').replace(/(=)/g, '":"');
+	 pre2=eval("(" + '{"'+pre1+'"}' + ")");
+	 pre3=pre2.prejdid;
+	 pre4=pre2.presnid;
+	  if (pre3 > 0){
+	  document.getElementById("num1").value = pre3;
+	  price_jd()
+	  }
+	  else if (pre4 > 0){
+	  document.getElementById("num3").value = pre4;
+	  price_sn()
+	  }
+     }
+	}
+	tra();
+</script>
+
+</p>
+<br />
+<p>
+<a href="stockdd.htm" target="_blank">当当</a>ID:
+<input type="text" value="" id="num4" style="width:100px" onkeyup="self['num4'].value=self['num4'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_dd()"/>
+<a href="stockgm.htm" target="_blank">国美</a>ID:
+<input type="text" value="" id="num5" style="width:160px" onkeyup=""/>
+<input type="button" value="查询" onclick="clear1();price_gm()"/>
+<a href="stockyhd.htm" target="_blank">一号店</a>ID:
+<input type="text" value="" id="num6" style="width:100px" onkeyup="self['num6'].value=self['num6'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')"/>
+<input type="button" value="查询" onclick="clear1();price_yhd()"/>
+
+</p>
+<br />
+<p>
+<textarea id="ta1" cols="36" rows="36" readonly="readonly">
+</textarea>
+</p>
+<br />
+<p>说明：京东剩余1~5件时显示库存数量。一号店各地区ID不同，适用于查询有货地区ID库存数量。当当、国美需使用<a href="crossdo.html">[跨域方法]</a></p>
+<br />
+<br />
+<p>☯Open Source, Open World.☯</p>
+<p>[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+
+</div>
+
+</body>
+</html>

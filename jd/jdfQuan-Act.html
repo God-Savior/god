@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东,优惠券,找活动,叠加优惠"/>
+<meta name="description" content="京东优惠券可用商品页找活动"/>
+<meta name="author" content="http://cll.name" />
+<title>京东优惠券可用商品页找活动</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!---->
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function getid1() {
+  p = 0;
+  getid();
+}
+
+xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+
+function getid() {
+if ((eval(link2.value)*2-1 + p) <= link3.value*2){
+	if (xhr) {
+		xhr.open('get', link1.value + (eval(link2.value)*2-1 + p), true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				prog6.innerText = Math.ceil(p/2)+1;
+				page1 = xhr.responseText.replace(/(src=)/g, '');
+				//page2 = $(page1).find(".J_focus").attr("data-sku");
+				$(page1).find(".J_focus").each(function(){document.getElementById("ta1").value+=$(this).attr("data-sku")+"\r\n";});
+				p++;
+				getid();
+			}
+			xhr.onerror = function(){getid();};
+		}
+		xhr.timeout = 6000;
+		xhr.ontimeout = function(){getid();};
+		xhr.send();
+	}
+}
+else if ((eval(link2.value)+p) > link3.value){
+line1();
+};	
+}
+
+
+function line1() {
+i = 0;
+ri = 1;
+str=document.getElementById("ta1").value;
+arr=str.split("\n"); 
+//alert(arr[i])
+//alert(arr.length)
+line2();
+}
+
+function line2(){
+	if (i < arr.length){
+		if (arr[i]){
+			jdquan(i,arr[i]);
+			i++;
+			line2();
+		}else {i++; line2();}
+	}
+}
+
+/*
+function jdquan(){
+	var js = document.createElement("script");
+    js.src = "http://cd.jd.com/promotion/v2?callback=jQueryQuan&skuId="+arr[i]+"&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=";
+	js.charset = "gbk";
+    document.body.appendChild(js);
+	js.onerror = function(){jdquan();};
+}
+function jQueryQuan(quandata){
+	document.getElementById("prog1").innerText = ("["+(i+1) + "/" + (arr.length)+"] "+arr[i]);
+	if (JSON.stringify(quandata).indexOf(text1.value) >= 0) {document.getElementById("ta2").value += arr[i]+"\r\n";prog3.innerText = ri;ri++;i++;line2();}else {i++;line2();}
+}
+*/
+function jdquan(numn,arrn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://cd.jd.com/promotion/v2?callback=jQueryQuan"+numn+"&skuId="+arrn+"&area=22_1930_4284_0&shopId=0&venderId=0&cat=1000%2C1000%2C1000&_=";
+	jsonp.charset = "gbk";
+	jsonp.onerror = function(){jdquan(numn,arrn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function jQueryQuan'+numn+'(quandata){document.getElementById("prog1").innerText = ("["+('+i+'+1) + "/" + (arr.length)+"] "+'+arrn+');if (JSON.stringify(quandata).indexOf(text1.value) >= 0) {document.getElementById("ta2").value += '+arrn+'+"\\r\\n"; prog3.innerText = ri; ri++;}}';
+	document.body.appendChild(myScript);
+}
+
+/*手动
+document.getElementById("o-header-2013").innerHTML='<textarea id="ta1" cols="12" rows="18" style=""></textarea><b id="prog6"></b>';
+p = 0;
+s1 = 1; //起始页
+s2 = 1; //结束页
+cb = 44476775; //coupon_batch数字
+function getid(){
+if ((s1*2-1 + p) <= s2*2){
+$.get("http://search.jd.com/s_new.php?coupon_batch="+cb+"&coupon_id=&rt=1&vt=2&scc=1&psort=2&s=1&click=1&page="+(s1*2-1 + p),function(data,status){
+	console.log(status);
+	if (status=='success'){
+		prog6.innerText = Math.ceil(p/2)+1;
+		page1=data.replace(/(src=)/g, '');
+		$(page1).find(".J_focus").each(function(){document.getElementById("ta1").value+=$(this).attr("data-sku")+"\r\n";});
+		p++;
+		getid();
+	}else{getid();};
+})}else if ((s1+p) > s2){
+//line1();
+};
+}
+getid();
+
+*/
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>【京东优惠券可用商品页找活动】</b></p>
+
+<!--链接：<input type="text" value="https://search.jd.com/s_new.php?coupon_batch=44542065&coupon_id=&rt=1&vt=2&scc=1&psort=2&s=1&click=1&page=" id="link1" style="width:500px" />
+
+页数<input type="text" value="1" id="link2" style="width:20px" />-<input type="text" value="1" id="link3" style="width:20px" />
+<input type="button" value="I.开始" onclick="getid1();"/>
+<b id="prog6"></b>-->
+<br />
+所有商品ID：<textarea id="ta1" cols="12" rows="18" style=""></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta1').value=''"/>
+过滤结果：<textarea id="ta2" cols="12" rows="18" style="" readonly="readonly"></textarea>
+<input type="button" value="清空" onclick="javascript:document.getElementById('ta2').value=''"/>
+<br />
+<br />
+<input type="button" value="II.开始" onclick="line1();"/>
+
+活动信息中包含字符:<input type="text" value="每满199元，可减100元现金" id="text1" style="width:170px" />
+<br />
+进度：<b id="prog1">[0/0] 888888</b> 结果数：<b id="prog3">0</b>
+<br />
+<br />
+<p>说明：用于查找京东优惠券可用商品页面，可叠加满减等活动商品。</p>
+<p>I、浏览器打开<a href="https://quan.jd.com/user_quan.action">[京东优惠券]</a>页面，点立即使用打开<b>优惠券凑单</b>页面，按F12，切换到console控制台选项卡，手动复制粘贴以下代码，修改代码中coupon_batch(凑单页链接对应数字)和页数等值，回车键后将在优惠券凑单页面顶部显示所有ID，再复制ID到本页左框执行第二步。</p>
+<xmp align="left">
+document.getElementById("o-header-2013").innerHTML='<textarea id="ta1" cols="12" rows="18" style=""></textarea>进度：<b id="prog6"></b>';
+p = 0;
+s1 = 1; //起始页
+s2 = 1; //结束页
+cb = 44476775; //coupon_batch数字
+lp = 0; //设置最低价格。超过100页需要在此设置第100页的价格整数，重设页数再次获取。
+st = 1; //只提取有货=1需在京东页面选好配送地区，含无货=0。
+function getid(){
+rp = s1*2-1 + p;
+if (rp <= s2*2){
+$.get("https://search.jd.com/s_new.php?coupon_batch="+cb+"&vt=2&psort=2&scrolling=y&log_id=123&stock="+st+"&wtype=1&ev=exprice_"+lp+"gt%5E&s="+((rp-1)*30+1)+"&page="+rp,function(data,status){
+	console.log(status);
+	if (status=='success'){
+		prog6.innerText = Math.ceil(p/2)+1;
+		page1=data.replace(/(src=)/g, '');
+		$(page1).find(".J_focus").each(function(){document.getElementById("ta1").value+=$(this).attr("data-sku")+"\r\n";});
+		p++;
+		getid();
+	}else{getid();};
+})}else if ((s1+p) > s2){
+prog6.innerText = "完成";
+//line1();
+};
+}
+getid();
+</xmp>
+<p>II、输入商品活动特征字符后开始，如商品页面促销显示的“每满199元，可减100元现金”或者详情 >>活动页链接特征符号类似“XAf7NTyxpigOm1”。由原来单线程改为全线程处理，100页有6000个ID，最好每5000执行一次，过多会出错，几千ID点开始后会卡顿一会儿请耐心等待。
+如果出现重复项，可用此工具删除：【<a href="delw.html">删除重复等过滤工具</a>】
+</p>
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/" target="_blank">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+<div id="a1"></div>
+</body>
+</html>

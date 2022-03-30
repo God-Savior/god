@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="京东商品评价,内容,查看,工具"/>
+<meta name="description" content="京东商品评价内容查看工具"/>
+<meta name="author" content="http://cll.name" />
+<title>京东商品评价内容查看工具</title>
+<base target="_blank"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script>
+
+function line1(){
+result1.innerHTML=""
+i = 1;
+ii = 1;
+str=document.getElementById("text1").value;
+//alert(arr[i])
+//alert(arr.length)
+jdcomm();
+}
+
+function jdcomm(){
+    var script = document.createElement("script");
+    script.src = "http://club.jd.com/comment/getSkuProductPageComments.action?productId="+str+"&score=0&sortType=3&page=0&pageSize=10&callback=fetchJSON";
+    document.body.appendChild(script);
+	script.onerror = function(){jdcomm();};
+}
+function fetchJSON(data1){
+	var csum = data1.productCommentSummary;
+	count = eval(csum.commentCount);
+	document.getElementById("cominf1").innerText="评价数："+count+" 好评率："+csum.goodRateShow+"%";
+	allpn = Math.ceil(count/10);
+	for(i2=0;i2<count;i2++){add1();};
+	i4=0;
+	jd1();
+}
+
+function jd1(){
+	//console.log('p'+(i4+1));
+	if (i4<allpn){
+		jdcomm2(i4);
+		i4++;
+		jd1();
+		/*
+		if (i4>0 && i4%100==0){
+			t1 = window.setTimeout(function(){console.log('a'+i4);jdcomm2(i4);i4++;jd1();clearTimeout(t1)},3000);
+		}
+		else{
+			jdcomm2(i4);
+			i4++;
+			jd1();
+		}*/
+	}
+}
+
+//if(i4%100==0){setTimeout(jdcomm2(i4), 3000);} else{jdcomm2(i4);}
+//for(i4=0;i4<allpn;i4++){jdcomm2(i4)};
+//http://club.jd.com/comment/getSkuProductPageComments.action?productId=2429500&score=0&sortType=3&page=0&pageSize=10&callback=fetchJSON_comment98vv1313
+//所有http://sclub.jd.com/productpage/p-2429500-s-0-t-3-p-1.html?callback=fetchJSON_comment98vv1313
+
+/*
+function jdcomm2(numn){
+    var jsonp = document.createElement("script");
+    jsonp.src = "http://club.jd.com/comment/getSkuProductPageComments.action?productId="+str+"&score=0&sortType=3&page="+numn+"&pageSize=10&callback=fetchJSON"+numn+"&_="+ new Date().getTime();
+	jsonp.onerror = function(){jdcomm2(numn);};
+    document.body.appendChild(jsonp);
+	
+	var myScript = document.createElement("script");
+	myScript.text = 'function fetchJSON'+numn+'(data2){console.log("sp'+numn+'");if(data2){for(i3=0;i3<data2.comments.length;i3++){document.getElementById("pm"+ii).innerText=(data2.comments[i3].content);console.log("s"+ii);ii++;}}else{jdcomm2('+numn+')}}';
+	
+	document.body.appendChild(myScript);
+}*/
+
+function jdcomm2(numn){
+$.ajax({
+	url: "http://club.jd.com/comment/getSkuProductPageComments.action?productId="+str+"&score=0&sortType=3&page="+numn+"&pageSize=10&callback=?&_="+ new Date().getTime(),
+	type: 'GET',
+	async: false,
+	dataType: 'jsonp',
+	success: function(json1){
+		//console.log(json1);
+		if (json1.comments){
+		var promdata = json1;
+		console.log("sp"+numn);
+		for(i3=0;i3<promdata.comments.length;i3++){
+			document.getElementById("pm"+ii).innerHTML=("下单时间："+promdata.comments[i3].referenceTime +" 购买"+promdata.comments[i3].days +"天后评价 <b>"+ promdata.comments[i3].content+"</b>");
+			//console.log("s"+ii);
+			document.getElementById("prog1").innerText="["+ii+"/"+count+"]"
+			ii++;
+		}
+		}else{
+			console.log("F"+numn);
+			var t=setTimeout("console.log('try'+"+numn+");jdcomm2("+numn+")",60000);
+		}
+		},
+	timeout: 5000,
+	error: function(XHR, status, error){
+		console.log("FB"+numn);
+		var t=setTimeout("console.log('try'+"+numn+");jdcomm2("+numn+")",60000);
+	}
+});
+}
+
+//http://club.jd.com/productpage/p-2429500-s-0-t-0-p-100.html?callback=skuJDEvalF&t=&g_ty=ls
+
+
+function add1(){
+	var htmlNode = document.createElement('p');
+	htmlNode.id="pnum"+i;
+	htmlNode.style.height= "50px";
+	htmlNode.innerHTML = "<p>"+i+"、<font id='pm"+i+"'></font>"+" <b id='pd"+i+"'></b></p>";
+	document.getElementById("result1").appendChild(htmlNode);
+	i++;
+}
+
+</script>
+
+<style type="text/css">
+ p{margin:0}
+</style>
+</head>
+
+<body bgcolor="" style="line-height:1.2;" >
+<div align="center" style="width:1000px;margin:0px auto;background:">
+<p align="center"><b>【京东商品评价内容查看工具】</b></p>
+<br />
+<a href="http://cart.jd.com/cart">[购物车]</a>
+<br />
+
+商品ID：
+<input type="text" value="2429500" id="text1" style="width:88px" onkeyup="self['text1'].value=self['text1'].value.replace(/[^\d]/g,'');" onchange="this.value=this.value.replace(/\D/g,'')" />
+<input type="button" value="开始" onclick="line1();"/>
+<b id="cominf1"></b>
+<b id="prog1">[0/0]</b>
+<div id="result1" align="left"></div>
+
+<div style="width:100%; float:left;"> 
+<br />
+
+<br />
+<p>说明：一页显示所有评价内容，用于方便搜索查看存储产品评价的实测速度等。京东限制每60秒请求大致10-30页(100-300条)，每60秒增加一次结果，请挂机等待加载完成。本工具是全线程同时处理，如果评价条数有数万以上，开始会占用大量内存，占用CPU高，有所延迟显示。
+</p>
+
+<br />
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name/jd/" target="_blank">CLL.name/jd</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</div>
+<div id="a1"></div>
+</body>
+</html>

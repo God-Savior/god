@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="倒计时,Countdown,提醒工具"/>
+<meta name="description" content="倒计时,Countdown,提醒工具 - JavaScript软件,程序"/>
+<meta name="author" content="http://cll.name" />
+<title>倒计时 Countdown |提醒工具 - JavaScript软件,程序</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?171a87d726e476b2d1fc723e78d89b42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript">
+var run;
+function start1() {
+	nowt = new Date().getTime();
+	endt = nowt + (ha.value * 3600 * 1000 + ma.value * 60 * 1000 + sa.value * 1000);
+	start2();
+};
+
+function start2() {
+	now = new Date().getTime();
+	var d2 = new Date(endt)
+		document.getElementById("endtime1").innerHTML = d2.getFullYear() + "-" + (d2.getMonth() + 1) + "-" + d2.getDate() + " " + d2.getHours() + ":" + d2.getMinutes() + ":" + d2.getSeconds();
+
+	if (now >= endt) {
+		window.clearTimeout(run);
+		if (document.getElementById("_ale").checked){
+			showDeskTopNotice();
+			confirm(text1.value);
+		}else{
+			plays();
+			flash_title();
+			//showDeskTopNotice();
+		}
+		
+	} else {
+		endt1 = endt - now
+			ha1 = parseInt((endt1 / (3600 * 1000)))
+			ma1 = parseInt((endt1 / (60 * 1000)) % 60)
+			sa1 = parseInt((endt1 / 1000) % 60)
+			document.getElementById("etime").innerHTML = (ha1 < 10 ? "0" : "") + ha1 + ":" + (ma1 < 10 ? "0" : "") + ma1 + ":" + (sa1 < 10 ? "0" : "") + sa1;
+		document.title = (ha1 < 10 ? "0" : "") + ha1 + ":" + (ma1 < 10 ? "0" : "") + ma1 + ":" + (sa1 < 10 ? "0" : "") + sa1 + ' 倒计时 Countdown |提醒工具';
+		run = setTimeout("start2()", 1000);
+	}
+};
+
+function stop() {
+	if (run) {
+		window.clearTimeout(run);
+	}
+};
+
+
+step = 0;
+function flash_title() {
+	step++;
+	if (step % 2 == 0) {
+		document.title = '【时间到！！！】倒计时,Countdown,提醒工具 - JavaScript软件,程序';
+	} else if (step % 2 == 1) {
+		document.title = '【　　　　　】倒计时,Countdown,提醒工具 - JavaScript软件,程序';
+	}
+	clear = setTimeout("flash_title()", 300);
+	if (step >= 30) {
+		window.clearTimeout(clear);
+		document.title = '倒计时,Countdown,提醒工具 - JavaScript软件,程序';
+		step = 0
+	}
+}
+
+function showDeskTopNotice() {
+	var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+	if (Notification) {
+		Notification.requestPermission(function (status) {
+			if (status != "granted") {
+				return;
+			} else {
+				var notify = new Notification(
+						'【倒计时】', {
+						dir: 'auto',
+						lang: 'zh-CN',
+						vibrate: [3000],
+						sound: 'http://cll.name/message.mp3',
+						icon: 'data:image/png;base64,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',
+						body: text1.value+'\r\n \r\n \r\n \r\n '
+					});
+				notify.onclick = function () {
+					window.focus();
+					window.open('http://jd.cll.name/Countdown.html');
+				},
+				notify.onerror = function () {
+					console.log("error!");
+				};
+				notify.onshow = function () {
+					setTimeout(function () {
+						notify.close();
+					}, 15000)
+				};
+				notify.onclose = function () {
+					console.log("close!");
+				};
+			}
+		});
+	} else {
+		console.log("unsupported!");
+		
+	}
+};
+
+function plays() {
+	var audio = document.createElement("audio");
+	var count = 1;
+	audio.src = "http://cll.name/message.mp3";
+	audio.addEventListener('ended', function () {
+		setTimeout(function () {
+			if (count < 3) {
+				audio.play();
+				count++
+			}
+		}, 300);
+	}, false);
+	audio.play();
+}
+</script>
+
+</head>
+<body>
+<div align="center" style="width:780px;margin:0px auto;background:">
+<p align="center"><b>倒计时 Countdown</b></p>
+设定时间：
+<input id="ha" type="text" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" style="width:30px">时
+<input id="ma" type="text" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" style="width:30px">分
+<input id="sa" type="text" value="" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" style="width:30px">秒
+<input type="button" value="开始" onclick="stop();start1();" />
+<input type="button" value="停止" onclick="stop();" />
+<br/>
+<br/>
+提醒内容：<input id="text1" type="text" value="Baby! 时间到！行动起来！Hurry up!" style="width:260px">
+<br/>
+<br/>
+<form>提醒方式：
+<input type="radio" checked="checked" name="ale" id="_ale" />弹窗
+<input type="radio" name="ale" id="_sou" />声音
+</form>
+<br/>
+剩余时间：
+<b id="etime">00:00:00</b>
+<br/>
+<br/>
+现在时间：
+<b id="nowtime1"></b>
+<script>
+	function timen(){
+	  tn = new Date().getTime();
+	  var d = new Date(tn)
+	  document.getElementById("nowtime1").innerHTML = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	}
+	setInterval("timen()", 100);
+</script>
+<br/>
+<br/>
+结束时间：
+<b id="endtime1"></b>
+
+<p align="center">☯Open Source, Open World.☯</p>
+<p align="center">[版权木有©盗版不究] Copyright © 2015-∞ <a href="http://cll.name" target="_blank">CLL.name</a> CLL Corporation, All Rights Reserved.</p>
+</div>
+</body>
+</html>
+
+
+
