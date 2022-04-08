@@ -159,26 +159,35 @@ getid();
 document.getElementById("o-header-2013").innerHTML='<textarea id="ta1" cols="12" rows="18" style=""></textarea>进度：<b id="prog6"></b>';
 p = 0;
 s1 = 1; //起始页
-s2 = 1; //结束页
-cb = 44476775; //coupon_batch数字
-lp = 0; //设置最低价格。超过100页需要在此设置第100页的价格整数，重设页数再次获取。
+s2 = 100; //结束页
+cb = 849390566; //coupon_batch数字
+lp = 0; //设置最低价格。超过100页需要在此设置第100页的最高价格整数，重设页数再次获取。页面下方删除重复等过滤工具去下重。
 st = 1; //只提取有货=1需在京东页面选好配送地区，含无货=0。
-function getid(){
-rp = s1*2-1 + p;
-if (rp <= s2*2){
-$.get("https://search.jd.com/s_new.php?coupon_batch="+cb+"&vt=2&psort=2&scrolling=y&log_id=123&stock="+st+"&wtype=1&ev=exprice_"+lp+"gt%5E&s="+((rp-1)*30+1)+"&page="+rp,function(data,status){
-	console.log(status);
-	if (status=='success'){
-		prog6.innerText = Math.ceil(p/2)+1;
-		page1=data.replace(/(src=)/g, '');
-		$(page1).find(".J_focus").each(function(){document.getElementById("ta1").value+=$(this).attr("data-sku")+"\r\n";});
-		p++;
-		getid();
-	}else{getid();};
-})}else if ((s1+p) > s2){
-prog6.innerText = "完成";
-//line1();
-};
+function getid() {
+    rp = s1 * 2 - 1 + p;
+    if (rp <= s2 * 2 ) {
+        $.get("https://search.jd.com/s_new.php?coupon_batch=" + cb + "&psort=2&ds=1&stock=" + st + "&ev=exprice_" + lp + "gt%5E&s=" + ((rp - 1) * 30 + 1) + "&page=" + rp, function (data, status) {
+            console.log(rp / 2);
+            if (status == 'success' && data.length>65) {
+                if (data.indexOf("抱歉，没有找到与")>0) { //length < 2025
+                    prog6.innerText = "已经是最后一页";
+                } else {
+                    prog6.innerText = rp / 2; //Math.ceil(p/2)+1;
+                    page1 = data.replace(/(src=)/g, '');
+                    $(page1).find(".J_focus").each(function () {
+                        document.getElementById("ta1").value += $(this).attr("data-sku") + "\r\n";
+                    });
+                    p++;
+                    getid();
+                }
+            } else {
+				prog6.innerText += " 请求错误，重试中...";
+				setTimeout('getid()', 5500);
+            };
+        })
+    } else if ((s1 + p) > s2) {
+        prog6.innerText = "完成";
+    };
 }
 getid();
 </xmp>

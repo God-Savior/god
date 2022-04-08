@@ -52,17 +52,20 @@ function getdc2() {
 	page2 = page1.indexOf(text1.value);
 	if (document.getElementById("dcc").checked){
 		if (page1.length != pagesave.length){
+			document.title = "已更改！";
 			alert("已更改！");
 			window.clearTimeout(t1);
 		} else {getdc3()}
 	}
 	else if (document.getElementById("dcy").checked){
 		if (page2 >=0 ){
+			document.title = "已出现！";
 			alert("已出现！");
 			window.clearTimeout(t1);
 		} else {getdc3()}
 	} else {
 		if (page2 <0 ){
+			document.title = "已消失！";
 			alert("已消失！");
 			window.clearTimeout(t1);
 		} else {getdc3()}

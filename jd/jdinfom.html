@@ -93,10 +93,9 @@ function jdprom(domnum,nid){
 	document.body.appendChild(myScript);
 }
 
-
 function jdmprice(numn){
     var jsonp = document.createElement("script");
-    jsonp.src = "http://pm.3.cn/prices/mgets?skuids="+arr[i]+"&origin=2&callback=jQuerym"+numn+"&_="+ new Date().getTime();
+    jsonp.src = "https://p.3.cn/prices/mgets?skuIds=J_"+arr[i]+"&area=22_1930_49327_49375&pduid=164327580910677934873&callback=jQuerym"+numn+"&_="+ new Date().getTime();
 	jsonp.onerror = function(){jdmprice(numn);};
     document.body.appendChild(jsonp);
 	
